@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "Chympy",
+  "version": "0.1.0",
+  "permissions": [
+    "all_urls"],
+
+  "browser_action": {"default_popup": "index.html"},
+  "content_scripts": [{
+    "js": [
+      "main.js"
+    ]
+  }]
+}
