@@ -1,0 +1,19 @@
+{
+  "name": "extension_chympy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plasilva1997/extension_chympy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/plasilva1997/extension_chympy/issues"
+  },
+  "homepage": "https://github.com/plasilva1997/extension_chympy#readme"
+}
