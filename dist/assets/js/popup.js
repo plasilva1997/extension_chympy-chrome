@@ -8,8 +8,8 @@ if(token!==null){
 }
 
 document.getElementById("submit").addEventListener("click", login); //Ajoute la fonction au boutton submit
-let form = document.querySelector("#form-login");
-let loading = document.querySelector(".loading");
+let form = document.querySelector("#form-login"); //Recupere le formulaire
+let loading = document.querySelector(".loading"); //Recupere le loader
 
 
 function login() {
@@ -40,7 +40,7 @@ function login() {
         window.location.reload();
     });
 
-    loading.style.display="block";
+    loading.style.display="flex"; //Affiche le loader
 }
 
 
