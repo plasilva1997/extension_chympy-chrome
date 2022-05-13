@@ -1,8 +1,9 @@
 /*POUR L'HTML DE L'EXETENSION */
 
-let getToken=localStorage.getItem("token") ;
+const token=localStorage.getItem("token") ;
+const urlAPI="https://chympy.net/api/";
 
-if(getToken!==null){
+if(token!==null){
     window.location.replace("./dashboard.html")
 }
 
@@ -15,7 +16,7 @@ function login() {
     var login = document.getElementById("email").value; //recuperation de l'email
     var password = document.getElementById("password").value; //recuperation du mot de passe
 
-    fetch("https://chympy.net/api/particuliers/login", { //requete avec les données
+    fetch(urlAPI+"particuliers/login", { //requete avec les données
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -28,14 +29,39 @@ function login() {
         return response.json(); //recuperation du json
     }).then(function (data) {
 
-        if(data['token'] !== null) {
+        if(data['success'] !== false) {
             localStorage.setItem("token", data['token']); //stockage du token
             form.style.display = "none"; //Cache le login si on est connecté
-            window.location.replace("./dashboard.html")
+            getCompany();
+        }else{
+            window.location.reload();
         }
+    }).catch((error)=>{
+        window.location.reload();
     });
 
     loading.style.display="block";
 }
+
+
+function getCompany(){
+
+    fetch(urlAPI+"offres/find", { //requete avec les données
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Autorization": "Bearer "+token
+        },
+    }).then(function (response) {
+        return response.json(); //recuperation du json
+    }).then(function (data) {
+        localStorage.setItem("company",JSON.stringify(data))
+        window.location.replace("./dashboard.html");// redirection vers le dashboard
+    }).catch((error)=>{
+        window.location.reload();
+    });
+}
+
+
 
 
