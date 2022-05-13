@@ -9,7 +9,8 @@ if(token!==null){
 
 document.getElementById("submit").addEventListener("click", login); //Ajoute la fonction au boutton submit
 let form = document.querySelector("#form-login"); //Recupere le formulaire
-let loading = document.querySelector(".loading"); //Recupere le loader
+let loading = document.querySelector("#loading"); //Recupere le loader
+let errorMessageDiv=document.querySelector("#error-message");// recuper la div des erreurs
 
 
 function login() {
@@ -34,10 +35,12 @@ function login() {
             form.style.display = "none"; //Cache le login si on est connecté
             getCompany();
         }else{
-            window.location.reload();
+            errorMessageDiv.innerHTML="Une erreur s'est produites veuillez rééssayer";
+            loading.style.display="none"; //cache le loader
         }
     }).catch((error)=>{
-        window.location.reload();
+        errorMessageDiv.innerHTML="Une erreur s'est produites veuillez rééssayer";
+        loading.style.display="none"; //cache le loader
     });
 
     loading.style.display="flex"; //Affiche le loader
@@ -58,7 +61,8 @@ function getCompany(){
         localStorage.setItem("company",JSON.stringify(data))
         window.location.replace("./dashboard.html");// redirection vers le dashboard
     }).catch((error)=>{
-        window.location.reload();
+        errorMessageDiv.innerHTML="Une erreur s'est produites veuillez rééssayer";
+        loading.style.display="none"; //cache le loader
     });
 }
 
