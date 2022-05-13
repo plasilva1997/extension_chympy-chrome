@@ -11,7 +11,7 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    width: 100%;
+    width: 200px;
     height: 100px;
     margin-bottom: 20px;
 }
@@ -162,5 +162,66 @@ a{
     }
 }
 
+/* Dashboard style */
 
+.container__dashboard {
+    width: 400px;
+    height: auto;
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.contain{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
 
+.grid__paterns{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    margin: 0 auto;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-items: center;
+}
+
+.paterns {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+.patern{
+    display: flex;
+    width: 95%;
+    justify-content: center;
+    height: auto;
+    min-height: 20vh;
+    align-items: center;
+    border: var(--color-primary) solid 1px;
+    border-radius: 5px;
+}
+
+.logout{
+    color: #FD9F57;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.infos{
+    display: flex;
+}
+.horaires{
+    width: 50%;
+}
+.infosPhone{
+    width: 50%;
+}

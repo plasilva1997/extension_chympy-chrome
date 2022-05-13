@@ -13,4 +13,3 @@ if (url === "https://www.caf.fr/") {
         '<p style="color: #4b4b4b; font-size: 2rem; font-weight: 700; margin: 0">Ce site est partenaire de Chympy, sur chaque achat supérieur a 10 euros vous recuperez 3% en CashBack (cliquer <a style="font-weight: 900; text-decoration: none; color: #FD9F57" href="" target="_blank">ici</a> pour voir les conditions d\'achat)</p>' +
         '</div>'; //ajout d'un contenu à la div
 }
-
