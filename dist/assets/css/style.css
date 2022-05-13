@@ -210,7 +210,7 @@ a{
     cursor: pointer;
 }
 
-.infos{
+#infos{
     display: flex;
 }
 .horaires{

@@ -45,5 +45,8 @@ chrome.storage.local.get(["company","token"], function(items) {
 }});
 
 
+chrome.storage.local.set({urlChrome: window.location.toString()}, function() {});
+
+
 
 
