@@ -12,7 +12,7 @@ const urlAPI="https://chympy.net/api/";
 
 var token = "";
 
-chrome.storage.sync.get(["token"], function(items) {
+chrome.storage.local.get(["token"], function(items) {
 
     token=items.token;
     if(token!==null && token!== undefined) {
@@ -64,20 +64,25 @@ function login() {
 
 function getCompany(){
 
-    fetch(urlAPI+"definitions/Entreprise", { //requete avec les données
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Autorization": "Bearer "+token
-        },
-    }).then(function (response) {
-        return response.json(); //recuperation du json
-    }).then(function (data) {
-        chrome.storage.local.set({company: JSON.stringify(data)}, function() {});
-        window.location.replace("./dashboard.html");// redirection vers le dashboard
-    }).catch((error)=>{
-        errorMessageDiv.innerHTML="Une erreur s'est produites veuillez rééssayer";
-        loading.style.display="none"; //cache le loader
+    chrome.storage.local.get(["token"], function(items) {
+
+        token=items.token;
+        if(token!==null && token!== undefined) {
+            fetch(urlAPI+"offres/find", { //requete avec les données
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Autorization": "Bearer "+token
+                },
+            }).then(function (response) {
+                return response.json(); //recuperation du json
+            }).then(function (data) {
+                chrome.storage.local.set({company: JSON.stringify(data)}, function() {});
+                window.location.replace("./dashboard.html");// redirection vers le dashboard
+            }).catch((error)=>{
+                errorMessageDiv.innerHTML="Une erreur s'est produites veuillez rééssayer";
+                loading.style.display="none"; //cache le loader
+            });        }
     });
 }
 
