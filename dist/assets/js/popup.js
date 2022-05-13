@@ -3,6 +3,7 @@ const urlAPI="https://chympy.net/api/";
 
 var token = "";
 
+
 chrome.storage.local.get(["token"], function(items,token) {
 
     token=items.token;

@@ -1,9 +1,6 @@
 
-chrome.storage.local.get(["company","token","urlChrome"], function(items) {
+function setInformationCompany(company,url){
 
-    const url = items['urlChrome']; //url de la page
-
-    let company=JSON.parse(items['company']);
     let gridPattern=document.querySelector("#grid__paterns");
 
     for(let k =0 ; k < company.length; k++) {
@@ -22,16 +19,18 @@ chrome.storage.local.get(["company","token","urlChrome"], function(items) {
 
                     let infos = document.querySelector("#infosCompany");
 
+                    console.log(company[k]['id_company']['hours']['monday']['closed'] ? "test":"oui");
+
                     infos.innerHTML="<h2>"+companyCommercial_name+"</h2>"+
                         "<div id=\"infos\"><div class=\"horaires\">";
-                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['monday']['closed']==false ?  "Lundi : "+company[k]['id_company']['hours']['monday']['open_hour'] +"-"+ company[k]['id_company']['hours']['monday']['close_hour']+"</p>" : "fermé";
-                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['tuesday']['closed']==true ?  "Mardi : "+company[k]['id_company']['hours']['tuesday']['open_hour'] +"-"+ company[k]['id_company']['hours']['tuesday']['close_hour']+"</p>" : "fermé";
-                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['wednesday']['closed']==true ?  "Mercredi : "+company[k]['id_company']['hours']['wednesday']['open_hour'] +"-"+ company[k]['id_company']['hours']['wednesday']['close_hour']+"</p>" : "fermé";
-                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['thursday']['closed']==true ?  "Jeudi : "+company[k]['id_company']['hours']['thursday']['open_hour'] +"-"+ company[k]['id_company']['hours']['thursday']['close_hour']+"</p>" : "fermé";
-                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['friday']['closed'] ==true?  "Vendredi : "+company[k]['id_company']['hours']['friday']['open_hour'] +"-"+ company[k]['id_company']['hours']['friday']['close_hour']+"</p>" : "fermé";
-                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['saturday']['closed']==true ?  "Samedi : "+company[k]['id_company']['hours']['saturday']['open_hour'] +"-"+ company[k]['id_company']['hours']['saturday']['close_hour']+"</p>" : "fermé";
-                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['sunday']['closed']==true ?  "Samedi : "+company[k]['id_company']['hours']['sunday']['open_hour'] +"-"+ company[k]['id_company']['hours']['sunday']['close_hour']+"</p>" : "fermé";
-                        "  </div></div>";
+                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['monday']['closed']===false ?  "Lundi : "+company[k]['id_company']['hours']['monday']['open_hour'] +"-"+ company[k]['id_company']['hours']['monday']['close_hour']+"</p>" : "fermé";
+                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['tuesday']['closed'] ?  "Mardi : "+company[k]['id_company']['hours']['tuesday']['open_hour'] +"-"+ company[k]['id_company']['hours']['tuesday']['close_hour']+"</p>" : "fermé";
+                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['wednesday']['closed'] ?  "Mercredi : "+company[k]['id_company']['hours']['wednesday']['open_hour'] +"-"+ company[k]['id_company']['hours']['wednesday']['close_hour']+"</p>" : "fermé";
+                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['thursday']['closed'] ?  "Jeudi : "+company[k]['id_company']['hours']['thursday']['open_hour'] +"-"+ company[k]['id_company']['hours']['thursday']['close_hour']+"</p>" : "fermé";
+                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['friday']['closed'] ?  "Vendredi : "+company[k]['id_company']['hours']['friday']['open_hour'] +"-"+ company[k]['id_company']['hours']['friday']['close_hour']+"</p>" : "fermé";
+                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['saturday']['closed'] ?  "Samedi : "+company[k]['id_company']['hours']['saturday']['open_hour'] +"-"+ company[k]['id_company']['hours']['saturday']['close_hour']+"</p>" : "fermé";
+                    infos.innerHTML+="<p>"+company[k]['id_company']['hours']['sunday']['closed'] ?  "Dimanche : "+company[k]['id_company']['hours']['sunday']['open_hour'] +"-"+ company[k]['id_company']['hours']['sunday']['close_hour']+"</p>" : "Dimanche : fermé";
+                    "  </div></div>";
                 }
 
                 if(!companyWebsite.includes("https")){
@@ -44,5 +43,9 @@ chrome.storage.local.get(["company","token","urlChrome"], function(items) {
 
     }
 
+}
 
+chrome.storage.local.get(["company","urlChrome"], function(items) {
+    setInformationCompany(JSON.parse(items['company']),items['urlChrome']);
 });
+
