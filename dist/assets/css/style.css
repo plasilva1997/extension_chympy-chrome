@@ -165,7 +165,7 @@ a{
 /* Dashboard style */
 
 .container__dashboard {
-    width: 400px;
+    width: 450px;
     height: auto;
     min-height: 20vh;
     display: flex;
