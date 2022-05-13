@@ -165,7 +165,7 @@ a{
 /* Dashboard style */
 
 .container__dashboard {
-    width: 400px;
+    width: 450px;
     height: auto;
     min-height: 20vh;
     display: flex;
@@ -190,13 +190,6 @@ a{
     overflow-y: auto;
     overflow-x: hidden;
     justify-items: center;
-}
-
-.paterns {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
 }
 .patern{
     display: flex;
