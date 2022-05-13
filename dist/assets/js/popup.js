@@ -1,22 +1,13 @@
 /*POUR L'HTML DE L'EXETENSION */
-
-/*chrome.storage.local.remove(["token"],function(){
-    var error = chrome.runtime.lastError;
-    if (error) {
-        console.error(error);
-    }
-    console.log("fddsfsd")
-})*/
-
 const urlAPI="https://chympy.net/api/";
 
 var token = "";
 
-chrome.storage.local.get(["token"], function(items) {
+chrome.storage.local.get(["token"], function(items,token) {
 
     token=items.token;
     if(token!==null && token!== undefined) {
-        window.location.replace("./dashboard.html"); //redirige vers le dashboard si le token de connexion est toujours actif
+       window.location.replace("./dashboard.html"); //redirige vers le dashboard si le token de connexion est toujours actif
     }
 
 });
@@ -67,6 +58,7 @@ function getCompany(){
     chrome.storage.local.get(["token"], function(items) {
 
         token=items.token;
+
         if(token!==null && token!== undefined) {
             fetch(urlAPI+"offres/find", { //requete avec les données
                 method: "GET",
@@ -82,7 +74,8 @@ function getCompany(){
             }).catch((error)=>{
                 errorMessageDiv.innerHTML="Une erreur s'est produites veuillez rééssayer";
                 loading.style.display="none"; //cache le loader
-            });        }
+            });
+        }
     });
 }
 
