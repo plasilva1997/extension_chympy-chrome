@@ -7,6 +7,11 @@ if(token!==null){
     window.location.replace("./dashboard.html")
 }
 
+export function getToken(){
+    console.log(token)
+    return token;
+}
+
 document.getElementById("submit").addEventListener("click", login); //Ajoute la fonction au boutton submit
 
 let form = document.querySelector("#form-login"); //Recupere le formulaire

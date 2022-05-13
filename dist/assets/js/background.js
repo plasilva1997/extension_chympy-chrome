@@ -1,4 +1,8 @@
 /*POUR DOM DE LA PAGE*/
+console.log("dfff");
+import { getToken } from "./popup.js";
+
+console.log(getToken);
 
 const url = window.location.toString(); //url de la page
 
