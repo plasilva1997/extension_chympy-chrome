@@ -22,6 +22,7 @@ chrome.storage.sync.get(["token"], function(items) {
 });
 
 document.getElementById("submit").addEventListener("click", login); //Ajoute la fonction au boutton submit
+
 let form = document.querySelector("#form-login"); //Recupere le formulaire
 let loading = document.querySelector("#loading"); //Recupere le loader
 let errorMessageDiv=document.querySelector("#error-message");// recuper la div des erreurs
@@ -79,6 +80,7 @@ function getCompany(){
         loading.style.display="none"; //cache le loader
     });
 }
+
 
 
 
