@@ -12,6 +12,8 @@ chrome.storage.local.get(["token"], function(items,token) {
 
 });
 
+console.log(window.location);
+
 document.getElementById("submit").addEventListener("click", login); //Ajoute la fonction au boutton submit
 
 let form = document.querySelector("#form-login"); //Recupere le formulaire

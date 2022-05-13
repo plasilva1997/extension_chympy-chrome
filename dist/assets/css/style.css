@@ -181,7 +181,7 @@ a{
     width: 90%;
 }
 
-.grid__paterns{
+#grid__paterns{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
@@ -192,12 +192,6 @@ a{
     justify-items: center;
 }
 
-.paterns {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-}
 .patern{
     display: flex;
     width: 95%;
