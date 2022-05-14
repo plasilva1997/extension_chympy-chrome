@@ -1,19 +1,15 @@
 /*POUR L'HTML DE L'EXETENSION */
 const urlAPI="https://chympy.net/api/";
 
-var token = "";
+chrome.storage.local.get(["token"], function(items) {
 
 
-chrome.storage.local.get(["token"], function(items,token) {
-
-    token=items.token;
+    let token=items.token;
     if(token!==null && token!== undefined) {
        window.location.replace("./dashboard.html"); //redirige vers le dashboard si le token de connexion est toujours actif
     }
 
 });
-
-console.log(window.location);
 
 document.getElementById("submit").addEventListener("click", login); //Ajoute la fonction au boutton submit
 
@@ -41,6 +37,10 @@ function login() {
     }).then(function (data) {
         if(data['success'] !== false) {
             chrome.storage.local.set({token: data['token']}, function() {});
+
+            let d= new Date().getTime();
+
+            chrome.storage.local.set({token_at: d.toString()}, function() {});
             form.style.display = "none"; //Cache le login si on est connecté
             getCompany();
         }else{
