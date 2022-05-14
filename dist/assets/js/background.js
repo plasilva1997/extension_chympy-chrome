@@ -1,6 +1,6 @@
-/*POUR DOM DE LA PAGE*/
+/*POUR LE DOM DE LA PAGE*/
 
-chrome.storage.local.set({urlChrome: window.location.toString()}, function() {});//on stock l'url actuel
+get_chrome_value();
 
 function setBanner(company,url){
 
@@ -44,10 +44,17 @@ function setBanner(company,url){
         }
     }
 }
+function get_chrome_value() {
+    chrome.storage.local.get(["company", "urlChrome"], function (items) {
 
-chrome.storage.local.get(["company","urlChrome"], function(items) {
-    setBanner(JSON.parse(items['company']),items['urlChrome']);
-});
+        if (items['urlChrome'] !== null && items['urlChrome'] !== undefined) {
+            setBanner(JSON.parse(items['company']),items['urlChrome']);
+        } else {
+            get_chrome_value();//fonction recurssive tant qu'on a pas l'url
+        }
+    });
+}
+
 
 
 

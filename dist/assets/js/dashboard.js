@@ -1,3 +1,7 @@
+/*DASHBOARD DE LEXTENSION*/
+
+get_chrome_value();
+
 function setInformationCompany(company,url){
 
     let gridPattern=document.querySelector("#grid__paterns");
@@ -47,7 +51,16 @@ function getOpened(isClosed,day,open_at,close_at){//cette fonction renvoie si le
     return isClosed ? "<p>"+day+" fermé</p>" : "<p>"+day+" "+open_at+" - "+close_at+"</p>";
 }
 
-chrome.storage.local.get(["company","urlChrome"], function(items) {
-    setInformationCompany(JSON.parse(items['company']),items['urlChrome']);
-});
+
+function get_chrome_value() {
+    chrome.storage.local.get(["company", "urlChrome"], function (items) {
+
+        if (items['urlChrome'] !== null && items['urlChrome'] !== undefined) {
+             setInformationCompany(JSON.parse(items['company']), items['urlChrome']);
+        } else {
+            get_chrome_value();//fonction recurssive tant qu'on a pas l'url
+        }
+    });
+}
+
 
