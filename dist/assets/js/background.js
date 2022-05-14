@@ -1,5 +1,20 @@
 /*POUR LE DOM DE LA PAGE*/
 
+function get_chrome_value() {
+
+    let currentURL=window.location.href;
+
+    chrome.storage.local.get(["company", "urlChrome"], function (items) {
+
+        if (items['urlChrome'] !== null && items['urlChrome'] !== undefined && currentURL === items['urlChrome']) {
+            setBanner(JSON.parse(items['company']), items['urlChrome']);
+        } else {
+            chrome.storage.local.set({urlChrome: currentURL}, function() {});//on stock l'url actuel
+            get_chrome_value();//fonction recurssive tant qu'on a pas l'url
+        }
+    });
+}
+
 get_chrome_value();
 
 function setBanner(company,url){
@@ -18,6 +33,9 @@ function setBanner(company,url){
             let freeConditonMinCashBack = '';
 
             if (companyWebsite !== null && companyWebsite !== "") {
+
+                console.log(url);
+                console.log(companyWebsite);
 
                 // use `url` here inside the callback because it's asynchronous!
                 if (url.includes(companyWebsite.replace(/\s/g, ''))) {
@@ -38,21 +56,10 @@ function setBanner(company,url){
                         '<div style="background-repeat: no-repeat; background-size: contain; background-position: center;background-image: url(https://i.imgur.com/E2qN8Da.png); width: 150px; height: 100px"></div>' +
                         '<p style="color: #4b4b4b; font-size: 22px; font-weight: 700; margin: 0; width: 70%;line-height: 1.5em">Ce site est partenaire de Chympy, ' + freeCondition + ' vous recuperez ' + cashback + ' ' + unitCashback + ' en CashBack. ' + freeConditonMinCashBack + ' (cliquer <a style="font-weight: 900; text-decoration: none; color: #FD9F57" href="https://www.chympy.net/cgu" target="_blank">ici</a> pour voir les conditions d\'utilisation)</p>' +
                         '</div>'; //ajout d'un contenu à la div*
-                    break;
                 }
             }
         }
     }
-}
-function get_chrome_value() {
-    chrome.storage.local.get(["company", "urlChrome"], function (items) {
-
-        if (items['urlChrome'] !== null && items['urlChrome'] !== undefined) {
-            setBanner(JSON.parse(items['company']),items['urlChrome']);
-        } else {
-            get_chrome_value();//fonction recurssive tant qu'on a pas l'url
-        }
-    });
 }
 
 

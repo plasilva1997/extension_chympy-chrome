@@ -44,7 +44,6 @@ function login() {
         return response.json(); //recuperation du json
     }).then(function (data) {
         if(data['success'] !== false) {
-            set_chrome_url();
             chrome.storage.local.set({token: data['token']}, function() {});
             let d= new Date().getTime();
             chrome.storage.local.set({token_at: d.toString()}, function() {});
@@ -90,15 +89,15 @@ function getCompany(){
     });
 }
 
+set_chrome_url();
+
 function set_chrome_url(){
     chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
         if(tabs[0]!==null){
-            console.log("set")
             chrome.storage.local.set({urlChrome: tabs[0].url}, function() {});//on stock l'url actuel
         }else{
             set_chrome_url();
         }
     });
 }
-
 
