@@ -2,6 +2,7 @@ function setInformationCompany(company,url){
 
     let gridPattern=document.querySelector("#grid__paterns");
 
+    let existCompany=false;
     for(let k =0 ; k < company.length; k++) {
 
         if (company[k] !== null && company[k] !== undefined) {
@@ -11,7 +12,7 @@ function setInformationCompany(company,url){
 
             if(companyWebsite !== null && companyWebsite !== "") {
 
-                if (url.includes(companyWebsite.replace(/\s/g, ''))) {
+                if (url.includes(companyWebsite.replace(/\s/g, '')) && !existCompany) {
 
                     let infos = document.querySelector("#infosCompany");
 
@@ -26,6 +27,7 @@ function setInformationCompany(company,url){
                     infos.innerHTML+= getOpened(company[k]['id_company']['hours']['sunday']['closed'],"Dimanche :",company[k]['id_company']['hours']['sunday']['open_hour'],company[k]['id_company']['hours']['sunday']['close_hour']);
 
                     "  </div></div>";
+                    existCompany=true; //permet d'eviter les heures en double ...
                 }
 
                 if(!companyWebsite.includes("https")){
