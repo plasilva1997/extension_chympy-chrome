@@ -76,12 +76,12 @@ function getCompany(){
                     "Content-Type": "application/json",
                     "Autorization": "Bearer "+token
                 },
-            }).then(function (response) {
-                return response.json(); //recuperation du json
+            }).then(function (response) { //recuperation du json
+                return response.json();
             }).then(function (data) {
                 chrome.storage.local.set({company: JSON.stringify(data)}, function() {});
                 window.location.replace("./dashboard.html");// redirection vers le dashboard
-            }).catch((error)=>{
+            }).catch((error)=>{ //si il y a une erreur on redirige vers la page d'accueil
                 errorMessageDiv.innerHTML="Une erreur s'est produites veuillez rééssayer";
                 loading.style.display="none"; //cache le loader
             });
@@ -92,10 +92,10 @@ function getCompany(){
 set_chrome_url();
 
 function set_chrome_url(){
-    chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
-        if(tabs[0]!==null){
+    chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => { //recupere l'url de la page actuelle
+        if(tabs[0]!==null){ //si il y a une url
             chrome.storage.local.set({urlChrome: tabs[0].url}, function() {});//on stock l'url actuel
-        }else{
+        }else{ //sinon on stock une url par defaut
             set_chrome_url();
         }
     });

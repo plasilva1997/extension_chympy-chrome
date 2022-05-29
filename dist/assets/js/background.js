@@ -2,12 +2,12 @@
 
 function get_chrome_value() {
 
-    let currentURL=window.location.href;
+    let currentURL=window.location.href; //recupere l'url de la page
 
-    chrome.storage.local.get(["company", "urlChrome"], function (items) {
+    chrome.storage.local.get(["company", "urlChrome"], function (items) { //recupere les données stockées dans le local storage
 
-        if (items['urlChrome'] !== null && items['urlChrome'] !== undefined && currentURL === items['urlChrome']) {
-            setBanner(JSON.parse(items['company']), items['urlChrome']);
+        if (items['urlChrome'] !== null && items['urlChrome'] !== undefined && currentURL === items['urlChrome']) { //verifie si l'url de la page est la meme que celle stockée dans le local storage
+            setBanner(JSON.parse(items['company']), items['urlChrome']); //appel de la fonction setBanner
         } else {
             chrome.storage.local.set({urlChrome: currentURL}, function() {});//on stock l'url actuel
             get_chrome_value();//fonction recurssive tant qu'on a pas l'url
@@ -19,13 +19,13 @@ get_chrome_value();
 
 function setBanner(company,url){
 
-    for (let k = 0; k < company.length; k++) {
+    for (let k = 0; k < company.length; k++) { //parcours le tableau de la company
 
-        if (company[k] !== null && company[k] !== undefined) {
+        if (company[k] !== null && company[k] !== undefined) { //verifie si la company n'est pas null ou undefined
 
 
-            let companyWebsite = company[k]['id_company']['socials']['website'];
-            let conditionCashBack = company[k]['conditions']['min_value'];
+            let companyWebsite = company[k]['id_company']['socials']['website']; //recupere le site web de la company
+            let conditionCashBack = company[k]['conditions']['min_value']; //recupere la condition de cashback
             let conditionMinCashBack = company[k]['min_cashback'];
             let cashback = company[k]['cashback'];
             let unitCashback = company[k]['unit'];
@@ -34,11 +34,11 @@ function setBanner(company,url){
 
             if (companyWebsite !== null && companyWebsite !== "") {
 
-                console.log(url);
-                console.log(companyWebsite);
+                // console.log(url);
+                // console.log(companyWebsite);
 
-                // use `url` here inside the callback because it's asynchronous!
-                if (url.includes(companyWebsite.replace(/\s/g, ''))) {
+
+                if (url.includes(companyWebsite.replace(/\s/g, ''))) { //verifie si l'url de la page contient le site web de la company
 
                     let div = document.createElement("div"); //création d'une div
                     document.body.insertBefore(div, document.body.firstChild); //insertion de la div dans le body
