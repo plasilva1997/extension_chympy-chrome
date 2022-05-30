@@ -4,6 +4,8 @@ get_chrome_value();
 
 function setInformationCompany(company,url){
 
+    let currentDayName=new Date().toLocaleDateString("en-EN", { weekday: 'long' }).toLowerCase();
+
     let gridPattern=document.querySelector("#grid__paterns");
 
     let existCompany=false;
@@ -20,8 +22,12 @@ function setInformationCompany(company,url){
                 if (url.includes(companyWebsite.replace(/\s/g, '')) && !existCompany) {
 
                     let infos = document.querySelector("#horaires");
-
                     infos.innerHTML="<h2>"+companyCommercial_name+"</h2>";
+
+                    if(company_open(new Date(),company[k]['id_company']['hours'][currentDayName]['open_hour'],company[k]['id_company']['hours'][currentDayName]['close_hour'])){
+                        infos.innerHTML+="<p>OUVERT</p>";//Notification d'ouverture !
+                    }
+
                     infos.innerHTML+= getOpened(company[k]['id_company']['hours']['monday']['closed'],"Lundi :",company[k]['id_company']['hours']['monday']['open_hour'],company[k]['id_company']['hours']['monday']['close_hour']);
                     infos.innerHTML+= getOpened(company[k]['id_company']['hours']['tuesday']['closed'],"Mardi :",company[k]['id_company']['hours']['tuesday']['open_hour'],company[k]['id_company']['hours']['tuesday']['close_hour']);
                     infos.innerHTML+= getOpened(company[k]['id_company']['hours']['wednesday']['closed'],"Mercredi :",company[k]['id_company']['hours']['wednesday']['open_hour'],company[k]['id_company']['hours']['wednesday']['close_hour']);
@@ -43,8 +49,9 @@ function setInformationCompany(company,url){
 
             }
         }
-
     }
+
+    return true;
 }
 
 function getOpened(isClosed,day,open_at,close_at){//cette fonction renvoie si le magasin est ouvert ou non
@@ -57,7 +64,7 @@ function get_chrome_value() {
     chrome.storage.local.get(["company", "urlChrome"], async function (items) { //recuperation des données de l'extension
 
         if (items['urlChrome'] !== null && items['urlChrome'] !== undefined) { //si le site web existe
-            await setInformationCompany(JSON.parse(items['company']), items['urlChrome']); //affichage des informations
+            const test = await setInformationCompany(JSON.parse(items['company']), items['urlChrome']); //affichage des informations
         } else {
             get_chrome_value();//fonction recurssive tant qu'on a pas l'url
         }
@@ -113,6 +120,38 @@ function reformat_url(idUrl,url,tryReformat){
         }
 }
 
+function company_open(currentDay,openHours,closeHours){//donne l'information si le magasin est ouvert en temps réel
+
+    /*Heure et minute actuel*/
+    let currentHours=currentDay.getHours();
+    let currentMinute=currentDay.getMinutes();
+
+    /*Heure d'ouveture du magsin*/
+    let convertStringOpenHours=openHours;
+    convertStringOpenHours=convertStringOpenHours.split("h");
+    let convertOpenHours=parseInt(convertStringOpenHours[0]);
+    let convertOpenMinutes=parseInt(convertStringOpenHours[1]) || 0;
+
+    /*Heure de fermeture du magsin*/
+    let convertStringCloseHours=closeHours;
+    convertStringCloseHours=convertStringCloseHours.split("h");
+    let convertCloseHours=parseInt(convertStringCloseHours[0]);
+    let convertCloseMinutes=  parseInt(convertStringCloseHours[1]) || 0;
+
+
+    /*on calcul le nombre de secondes total */
+    let currentTotalHours=currentHours*3600+currentMinute*60;
+    let openHoursTotal=convertOpenHours*3600+convertOpenMinutes*60;
+    let openCloseTotal=convertCloseHours*3600+convertCloseMinutes*60;
+
+
+    if(currentTotalHours>=openHoursTotal && currentTotalHours<=openCloseTotal){
+        return true;//Ouvert actuelement
+    }else{
+        return false;//fermé actuelement
+    }
+
+}
 
 
 
