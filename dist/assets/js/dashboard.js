@@ -25,7 +25,9 @@ function setInformationCompany(company,url){
                     infos.innerHTML="<h2>"+companyCommercial_name+"</h2>";
 
                     if(company_open(new Date(),company[k]['id_company']['hours'][currentDayName]['open_hour'],company[k]['id_company']['hours'][currentDayName]['close_hour'])){
-                        infos.innerHTML+="<p>OUVERT</p>";//Notification d'ouverture !
+                        infos.innerHTML+="<p>c'est OUVERT</p>";//Notification d'ouverture !
+                    }else{
+                        infos.innerHTML+="<p>c'est fermé</p>";//Notification d'ouverture !
                     }
 
                     infos.innerHTML+= getOpened(company[k]['id_company']['hours']['monday']['closed'],"Lundi :",company[k]['id_company']['hours']['monday']['open_hour'],company[k]['id_company']['hours']['monday']['close_hour']);
