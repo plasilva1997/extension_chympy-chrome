@@ -357,7 +357,6 @@ a{
     flex-direction: row;
     gap: 15px;
     align-items: center;
-    justify-content: center;
 }
 
 @keyframes isOpen {
@@ -381,4 +380,20 @@ a{
     justify-content: center;
     align-items: center;
 
+}
+
+#horaires{
+    width: 50%;
+}
+
+#infosPhone{
+    width: 50%;
+}
+
+.imgCommerce{
+    width: 100%;
+    height: 125px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }

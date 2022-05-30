@@ -24,7 +24,7 @@ function setInformationCompany(company,url){
                     /*Informations générales*/
                     let infosPhoneDiv=document.querySelector("#infosPhone");
                     imgUrl="https://chympy.net/"+company[k]['id_company']['pictures']['profile_pic'].replace("client/dist/mdb-angular-free/","").trim();
-                    infosImg="<img src="+encodeURI(imgUrl)+" alt='' width='100px' height='100px'>";
+                    infosImg="<div class='imgCommerce' style='background-image: url("+encodeURI(imgUrl)+")'></div>";
                     infosPhoneDiv.innerHTML+=infosImg;
                     infosPhoneDiv.innerHTML+="<p>Téléphone : <a href='tel:"+company[k]['id_company']['trader_group']['phone']+"'>"+company[k]['id_company']['trader_group']['phone']+"</a></p>";
                     infosPhoneDiv.innerHTML+="<p>Adresse :"+company[k]['id_company']['trader_group']['address']+"</p>";
