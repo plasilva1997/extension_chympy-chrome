@@ -369,3 +369,16 @@ a{
     }
 
 }
+
+.statusOpen p {
+    font-size: 0.8rem;
+}
+
+.statusOpen{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+}
