@@ -22,12 +22,12 @@ function setInformationCompany(company,url){
                 if (url.includes(companyWebsite.replace(/\s/g, '')) && !existCompany) {
 
                     let infos = document.querySelector("#horaires");
-                    infos.innerHTML="<h2>"+companyCommercial_name+"</h2>";
+
 
                     if(company_open(new Date(),company[k]['id_company']['hours'][currentDayName]['open_hour'],company[k]['id_company']['hours'][currentDayName]['close_hour'])){
-                        infos.innerHTML+="<p>c'est OUVERT</p>";//Notification d'ouverture !
+                        infos.innerHTML+="<div id='name'><h2>"+companyCommercial_name+"</h2><div class='open'></div></div>";//Notification d'ouverture !
                     }else{
-                        infos.innerHTML+="<p>c'est fermé</p>";//Notification d'ouverture !
+                        infos.innerHTML+="<div id='name'><h2>"+companyCommercial_name+"</h2><div class='closed'></div></div>";//Notification d'ouverture !
                     }
 
                     infos.innerHTML+= getOpened(company[k]['id_company']['hours']['monday']['closed'],"Lundi :",company[k]['id_company']['hours']['monday']['open_hour'],company[k]['id_company']['hours']['monday']['close_hour']);

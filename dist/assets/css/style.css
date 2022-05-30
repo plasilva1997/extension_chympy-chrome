@@ -335,3 +335,37 @@ a{
 .fs-08rem {
     font-size: 0.8rem;
 }
+
+
+.open{
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: green;
+    animation: isOpen 2s ease-in-out infinite;
+}
+.closed{
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: red;
+}
+
+
+#name{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes isOpen {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.1;
+    }
+
+}
