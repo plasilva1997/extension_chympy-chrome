@@ -44,12 +44,11 @@ function login() {
         return response.json(); //recuperation du json
     }).then(function (data) {
         if(data['success'] !== false) {
+            form.style.display = "none"; //Cache le login si on est connecté
             chrome.storage.local.set({token: data['token']}, function() {});
             let d= new Date().getTime();
             chrome.storage.local.set({token_at: d.toString()}, function() {});
-            form.style.display = "none"; //Cache le login si on est connecté
             getCompany();
-
         }else{
             errorMessageDiv.innerHTML="Une erreur s'est produites veuillez rééssayer";
             loading.style.display="none"; //cache le loader

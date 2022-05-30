@@ -34,11 +34,8 @@ function setBanner(company,url){
 
             if (companyWebsite !== null && companyWebsite !== "") {
 
-                // console.log(url);
-                // console.log(companyWebsite);
 
-
-                if (url.includes(companyWebsite.replace(/\s/g, ''))) { //verifie si l'url de la page contient le site web de la company
+                if (url.includes(companyWebsite.replace(/\s/g, '')) && !url.includes("google.com")) { //verifie si l'url de la page contient le site web de la company
 
                     let div = document.createElement("div"); //création d'une div
                     document.body.insertBefore(div, document.body.firstChild); //insertion de la div dans le body
@@ -56,6 +53,7 @@ function setBanner(company,url){
                         '<div style="background-repeat: no-repeat; background-size: contain; background-position: center;background-image: url(https://i.imgur.com/E2qN8Da.png); width: 150px; height: 100px"></div>' +
                         '<p style="color: #4b4b4b; font-size: 22px; font-weight: 700; margin: 0; width: 70%;line-height: 1.5em">Ce site est partenaire de Chympy, ' + freeCondition + ' vous recuperez ' + cashback + ' ' + unitCashback + ' en CashBack. ' + freeConditonMinCashBack + ' (cliquer <a style="font-weight: 900; text-decoration: none; color: #FD9F57" href="https://www.chympy.net/cgu" target="_blank">ici</a> pour voir les conditions d\'utilisation)</p>' +
                         '</div>'; //ajout d'un contenu à la div*
+                    return;
                 }
             }
         }
