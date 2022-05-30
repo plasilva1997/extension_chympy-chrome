@@ -23,6 +23,7 @@ function setBanner(company,url){
 
         if (company[k] !== null && company[k] !== undefined) { //verifie si la company n'est pas null ou undefined
 
+
             let companyWebsite = company[k]['id_company']['socials']['website']; //recupere le site web de la company
             let conditionCashBack = company[k]['conditions']['min_value']; //recupere la condition de cashback
             let conditionMinCashBack = company[k]['min_cashback'];
@@ -33,10 +34,8 @@ function setBanner(company,url){
 
             if (companyWebsite !== null && companyWebsite !== "") {
 
-                // console.log(url);
-                // console.log(companyWebsite);
 
-                if (url.includes(companyWebsite.replace(/\s/g, ''))) { //verifie si l'url de la page contient le site web de la company
+                if (url.includes(companyWebsite.replace(/\s/g, '')) && !url.includes("google.com")) { //verifie si l'url de la page contient le site web de la company
 
                     let div = document.createElement("div"); //création d'une div
                     document.body.insertBefore(div, document.body.firstChild); //insertion de la div dans le body
@@ -53,11 +52,13 @@ function setBanner(company,url){
                     div.innerHTML = '<div style="z-index: 9999999999999; position: relative;width: 100%; border-bottom: #FD9F57 2px solid; height: auto; min-height: 5vh; color: white; background-color: #fafafa; display: flex; justify-content: space-around; align-content: center; align-items: center">' +
                         '<div id="banner" style="background-repeat: no-repeat; background-size: contain; background-position: center;background-image: url(https://i.imgur.com/E2qN8Da.png); width: 150px; height: 100px"></div>' +
                         '<p style="color: #4b4b4b; font-size: 22px; font-weight: 700; margin: 0; width: 70%;line-height: 1.5em">Ce site est partenaire de Chympy, ' + freeCondition + ' vous recuperez ' + cashback + ' ' + unitCashback + ' en CashBack. ' + freeConditonMinCashBack + ' (cliquer <a style="font-weight: 900; text-decoration: none; color: #FD9F57" href="https://www.chympy.net/cgu" target="_blank">ici</a> pour voir les conditions d\'utilisation)</p>' +
+                        '</div>'; //ajout d'un contenu à la div*
                         '</div> <div id="close" style="cursor: pointer;color: black; position: absolute; right: 25px; top: 25px; z-index: 999999999999; font-size: 1.5rem">x</div>'; //ajout du contenu de la div
 
                     document.getElementById('close').addEventListener('click', function () { //ajout d'un event listener sur la div
                         document.getElementById('extention_chympy_patern').remove(); //suppression de la div
                     });
+                    return;
                 }
             }
         }

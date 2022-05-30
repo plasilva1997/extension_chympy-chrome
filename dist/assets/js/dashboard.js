@@ -7,6 +7,7 @@ function setInformationCompany(company,url){
     let gridPattern=document.querySelector("#grid__paterns");
 
     let existCompany=false;
+
     for(let k =0 ; k < company.length; k++) {  //parcours le tableau de magasins
 
         if (company[k] !== null && company[k] !== undefined) { //si le magasin existe
@@ -32,17 +33,18 @@ function setInformationCompany(company,url){
                     "  </div>";
                     existCompany=true; //permet d'eviter les heures en double ...
                 }
-
-                if(!companyWebsite.includes("https")){
-                    companyWebsite="https://"+companyWebsite; //ajout du https
+                if(!companyWebsite.includes("https://")){
+                    companyWebsite="https://"+companyWebsite
                 }
+                idUrl='link-'+companyWebsite;
+                gridPattern.innerHTML+="<a id="+idUrl+" href="+companyWebsite+" target='_blank' class='patern'><h3>"+companyCommercial_name+"</h3></a>"; //ajout du nom du magasin dans la grid
 
-                gridPattern.innerHTML+="<a href="+companyWebsite+" target='_blank' class='patern'><h3>"+companyCommercial_name+"</h3></a>"; //ajout du nom du magasin dans la grid
+                reformat_url(idUrl,companyWebsite,0);
+
             }
         }
 
     }
-
 }
 
 function getOpened(isClosed,day,open_at,close_at){//cette fonction renvoie si le magasin est ouvert ou non
@@ -52,14 +54,65 @@ function getOpened(isClosed,day,open_at,close_at){//cette fonction renvoie si le
 
 
 function get_chrome_value() {
-    chrome.storage.local.get(["company", "urlChrome"], function (items) { //recuperation des données de l'extension
+    chrome.storage.local.get(["company", "urlChrome"], async function (items) { //recuperation des données de l'extension
 
         if (items['urlChrome'] !== null && items['urlChrome'] !== undefined) { //si le site web existe
-             setInformationCompany(JSON.parse(items['company']), items['urlChrome']); //affichage des informations
+            await setInformationCompany(JSON.parse(items['company']), items['urlChrome']); //affichage des informations
         } else {
             get_chrome_value();//fonction recurssive tant qu'on a pas l'url
         }
     });
+
 }
+
+function reformat_url(idUrl,url,tryReformat){
+
+    let link=document.getElementById(idUrl);
+    tryReformat++;
+    let newurl="";
+
+     if (tryReformat <= 4) {
+            fetch(url, { //requete avec les données
+                mode: "no-cors",
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(function (response) {
+                link = document.getElementById(idUrl);
+                link.setAttribute("href", url);
+                tryReformat = 0;
+
+                if (response.status !== 200 || response.status === 0) {//si c'est pas une 200 ou si c'est une cors alors on affiche pas le liens
+                    if (link !== null) {
+                        link.style.display = "none";
+                    }
+                }
+            }).catch((error) => {
+
+                switch (tryReformat) {
+                    case 1:
+                        newurl = "https://www." + url.replace("https://", "");
+                        break;
+                    case 2:
+                        newurl = "http://" + url.replace("https://www.", "");
+                        break;
+                    case 3:
+                        newurl = "http://www." + url.replace("http://", "");
+                        break;
+                    default:
+                        newurl = url;
+                }
+
+                if(tryReformat===4) {
+                    link.style.display = "none";
+                }
+
+                reformat_url(idUrl, newurl, tryReformat);
+            });
+        }
+}
+
+
 
 
