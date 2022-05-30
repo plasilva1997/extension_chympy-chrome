@@ -190,6 +190,29 @@ a{
     overflow-y: auto;
     overflow-x: hidden;
     justify-items: center;
+    text-align: center;
+}
+#grid__paterns a {
+    color: var(--color-primary);
+    text-decoration: none;
+    background-color: white;
+    width: 98%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid var(--color-primary);
+    border-radius: 5px;
+
+}
+
+#grid__paterns a:hover{
+    background-color: var(--color-primary);
+    color: #fff;
+    transition: 0.3s ease-in-out;
+}
+
 }
 
 .patern{
