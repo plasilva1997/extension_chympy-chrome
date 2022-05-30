@@ -319,3 +319,19 @@ a{
 .title{
     color: var(--color-primary);
 }
+
+
+.infosUtils h2,
+.infosUtils h3{
+    color: var(--color-primary);
+}
+
+
+.infosUtils h3{
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+.fs-08rem {
+    font-size: 0.8rem;
+}
