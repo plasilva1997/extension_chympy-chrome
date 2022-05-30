@@ -21,6 +21,16 @@ function setInformationCompany(company,url){
 
                 if (url.includes(companyWebsite.replace(/\s/g, '')) && !existCompany) {
 
+                    /*Informations générales*/
+                    let infosPhoneDiv=document.querySelector("#infosPhone");
+                    imgUrl="https://chympy.net/"+company[k]['id_company']['pictures']['profile_pic'].replace("client/dist/mdb-angular-free/","").trim();
+                    infosImg="<img src="+encodeURI(imgUrl)+" alt='' width='100px' height='100px'>";
+                    infosPhoneDiv.innerHTML+=infosImg;
+                    infosPhoneDiv.innerHTML+="<p>Téléphone : <a href='tel:"+company[k]['id_company']['trader_group']['phone']+"'>"+company[k]['id_company']['trader_group']['phone']+"</a></p>";
+                    infosPhoneDiv.innerHTML+="<p>Adresse :"+company[k]['id_company']['trader_group']['address']+"</p>";
+                    infosPhoneDiv.innerHTML+="<p>Description :"+company[k]['id_company']['presentation']+"</p>";
+
+                    /*Information de l'entreprise*/
                     let infos = document.querySelector("#horaires");
 
 
@@ -38,7 +48,8 @@ function setInformationCompany(company,url){
                     infos.innerHTML+= getOpened(company[k]['id_company']['hours']['saturday']['closed'],"Samedi :",company[k]['id_company']['hours']['saturday']['open_hour'],company[k]['id_company']['hours']['saturday']['close_hour']);
                     infos.innerHTML+= getOpened(company[k]['id_company']['hours']['sunday']['closed'],"Dimanche :",company[k]['id_company']['hours']['sunday']['open_hour'],company[k]['id_company']['hours']['sunday']['close_hour']);
 
-                    "  </div>";
+                    "</div>";
+
                     existCompany=true; //permet d'eviter les heures en double ...
                 }
                 if(!companyWebsite.includes("https://")){
@@ -114,7 +125,9 @@ function reformat_url(idUrl,url,tryReformat){
                 }
 
                 if(tryReformat===4) {
-                    link.style.display = "none";
+                    if(link !=null) {
+                        link.style.display = "none";
+                    }
                 }
 
                 reformat_url(idUrl, newurl, tryReformat);
@@ -124,31 +137,36 @@ function reformat_url(idUrl,url,tryReformat){
 
 function company_open(currentDay,openHours,closeHours){//donne l'information si le magasin est ouvert en temps réel
 
-    /*Heure et minute actuel*/
-    let currentHours=currentDay.getHours();
-    let currentMinute=currentDay.getMinutes();
 
-    /*Heure d'ouveture du magsin*/
-    let convertStringOpenHours=openHours;
-    convertStringOpenHours=convertStringOpenHours.split("h");
-    let convertOpenHours=parseInt(convertStringOpenHours[0]);
-    let convertOpenMinutes=parseInt(convertStringOpenHours[1]) || 0;
+    if(currentDay !==null && openHours!==null && closeHours!==null) {
+        /*Heure et minute actuel*/
+        let currentHours = currentDay.getHours();
+        let currentMinute = currentDay.getMinutes();
 
-    /*Heure de fermeture du magsin*/
-    let convertStringCloseHours=closeHours;
-    convertStringCloseHours=convertStringCloseHours.split("h");
-    let convertCloseHours=parseInt(convertStringCloseHours[0]);
-    let convertCloseMinutes=  parseInt(convertStringCloseHours[1]) || 0;
+        /*Heure d'ouveture du magsin*/
+        let convertStringOpenHours = openHours;
+        convertStringOpenHours = convertStringOpenHours.split("h");
+        let convertOpenHours = parseInt(convertStringOpenHours[0]);
+        let convertOpenMinutes = parseInt(convertStringOpenHours[1]) || 0;
 
-
-    /*on calcul le nombre de secondes total */
-    let currentTotalHours=currentHours*3600+currentMinute*60;
-    let openHoursTotal=convertOpenHours*3600+convertOpenMinutes*60;
-    let openCloseTotal=convertCloseHours*3600+convertCloseMinutes*60;
+        /*Heure de fermeture du magsin*/
+        let convertStringCloseHours = closeHours;
+        convertStringCloseHours = convertStringCloseHours.split("h");
+        let convertCloseHours = parseInt(convertStringCloseHours[0]);
+        let convertCloseMinutes = parseInt(convertStringCloseHours[1]) || 0;
 
 
-    if(currentTotalHours>=openHoursTotal && currentTotalHours<=openCloseTotal){
-        return true;//Ouvert actuelement
+        /*on calcul le nombre de secondes total */
+        let currentTotalHours = currentHours * 3600 + currentMinute * 60;
+        let openHoursTotal = convertOpenHours * 3600 + convertOpenMinutes * 60;
+        let openCloseTotal = convertCloseHours * 3600 + convertCloseMinutes * 60;
+
+
+        if (currentTotalHours >= openHoursTotal && currentTotalHours <= openCloseTotal) {
+            return true;//Ouvert actuelement
+        } else {
+            return false;//fermé actuelement
+        }
     }else{
         return false;//fermé actuelement
     }
