@@ -22,16 +22,16 @@ function setInformationCompany(company,url){
                 if (url.includes(companyWebsite.replace(/\s/g, '')) && !existCompany) {
 
                     /*Informations générales*/
-                    let infosPhoneDiv=document.querySelector("#infosPhone");
-                    imgUrl="https://chympy.net/"+company[k]['id_company']['pictures']['profile_pic'].replace("client/dist/mdb-angular-free/","").trim();
-                    infosImg="<div class='imgCommerce' style='background-image: url("+encodeURI(imgUrl)+")'></div>";
+                    let infosPhoneDiv=document.querySelector("#infosPhone"); //div de l'information du partenaire
+                    imgUrl="https://chympy.net/"+company[k]['id_company']['pictures']['profile_pic'].replace("client/dist/mdb-angular-free/","").trim(); //recuperation de l'image du partenaire
+                    infosImg="<div class='imgCommerce' style='background-image: url("+encodeURI(imgUrl)+")'></div>"; //affichage de l'image du partenaire
                     infosPhoneDiv.innerHTML+=infosImg;
-                    infosPhoneDiv.innerHTML+="<p>Téléphone : <a href='tel:"+company[k]['id_company']['trader_group']['phone']+"'>"+company[k]['id_company']['trader_group']['phone']+"</a></p>";
-                    infosPhoneDiv.innerHTML+="<p>Adresse :"+company[k]['id_company']['trader_group']['address']+"</p>";
-                    infosPhoneDiv.innerHTML+="<p>Description :"+company[k]['id_company']['presentation']+"</p>";
+                    infosPhoneDiv.innerHTML+="<p>Téléphone : <a href='tel:"+company[k]['id_company']['trader_group']['phone']+"'>"+company[k]['id_company']['trader_group']['phone']+"</a></p>"; //affichage du numero de telephone du partenaire
+                    infosPhoneDiv.innerHTML+="<p>Adresse :"+company[k]['id_company']['trader_group']['address']+"</p>"; //affichage de l'adresse du partenaire
+                    infosPhoneDiv.innerHTML+="<p>Description :"+company[k]['id_company']['presentation']+"</p>"; //affichage de la description du partenaire
 
                     /*Information de l'entreprise*/
-                    let infos = document.querySelector("#horaires");
+                    let infos = document.querySelector("#horaires"); //div de l'information de l'entreprise
 
 
                     if(company_open(new Date(),company[k]['id_company']['hours'][currentDayName]['open_hour'],company[k]['id_company']['hours'][currentDayName]['close_hour'])){
