@@ -3,11 +3,31 @@
 get_chrome_value();
 
 let activeClass = document.getElementById("activeOne");
-activeClass.addEventListener("click", myFunction); //Ajoute la fonction au boutton submit
+activeClass.addEventListener("click", ActiveOne); //Ajoute la fonction au boutton submit
 
-function myFunction() {
+let activeClass2 = document.getElementById("activeTwo");
+activeClass2.addEventListener("click", ActiveTwo);
+
+let GridPaternsAll = document.getElementById("grid__paterns");
+let GridPaternsSim = document.getElementById("grid__paterns1");
+
+
+function ActiveOne() {
+    var oldElement = document.getElementById("activeTwo");
     var element = document.getElementById("activeOne");
     element.classList.add("active");
+    oldElement.classList.remove("active");
+    GridPaternsSim.classList.remove("d-none");
+    GridPaternsAll.classList.add("d-none");
+}
+
+function ActiveTwo() {
+    var oldElement = document.getElementById("activeOne");
+    var element = document.getElementById("activeTwo");
+    element.classList.add("active");
+    oldElement.classList.remove("active");
+    GridPaternsAll.classList.remove("d-none");
+    GridPaternsSim.classList.add("d-none");
 }
 
 
@@ -73,14 +93,15 @@ function setInformationCompany(company, url) {
 
                 idUrl = 'link-' + companyWebsite;
 
+
                 /*Patenaire de la meme catgeorie*/
-                let gridSameCatgeory=document.querySelector("#grid_same__paterns");
+                let gridSameCatgeory=document.querySelector("#grid__paterns1");
                 if(company[k]['id_company']['id_category']['label'] === currentCompanyCategory){//si la categorie du site client est egale a la catgeorie du site de la boucle alors ils font font partie de la meme categorie
-                    gridSameCatgeory.innerHTML += "<a id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
+                    gridSameCatgeory.innerHTML += "<a class='patern brown' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
                 }
 
                 /*tout les partenaires*/
-                gridPattern.innerHTML += "<a id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
+                gridPattern.innerHTML += "<a class='patern' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
 
                 reformat_url(idUrl, companyWebsite, 0);//format les url qui ne fonctionne pas http:/// http://www. etc si le format echoue alors on supprimer le liens pour éviter les liens mort
 
