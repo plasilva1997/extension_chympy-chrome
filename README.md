@@ -18,10 +18,10 @@ Ouvrez un terminal dans le dossier du projet et tapez la commande suivante:
 
 ## Couleurs
 
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Couleur principale| ![#FD9F57](https://via.placeholder.com/10/FD9F57?text=+) #FD9F57 |
-| Example Color | ![#703400](https://via.placeholder.com/10/703400?text=+) #703400 |
+| Couleur           | Hex                                                                |
+|-------------------| ------------------------------------------------------------------ |
+| Couleur principale | ![#FD9F57](https://via.placeholder.com/10/FD9F57?text=+) #FD9F57 |
+| Couleur secondaire | ![#703400](https://via.placeholder.com/10/703400?text=+) #703400 |
 
 
 ## Screenshots
