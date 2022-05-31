@@ -9,6 +9,7 @@ function setInformationCompany(company, url) {
     let gridPattern = document.querySelector("#grid__paterns");
 
     let existCompany = false;
+    let currentCompanyCategory=null;
 
     for (let k = 0; k < company.length; k++) {  //parcours le tableau de magasins
 
@@ -21,8 +22,9 @@ function setInformationCompany(company, url) {
 
                 if (url.includes(companyWebsite.replace(/\s/g, '')) && !existCompany) {
 
+                    currentCompanyCategory=company[k]['id_company']['id_category']['label'];//categorie actuel du site à laquel se trouve le client
 
-                    /*Informations générales*/
+                    /*Informations l'entreprise*/
                     let infosPhoneDiv = document.querySelector("#infosPhone"); //div de l'information du partenaire
                     imgUrl = "https://chympy.net/" + company[k]['id_company']['pictures']['profile_pic'].replace("client/dist/mdb-angular-free/", "").trim(); //recuperation de l'image du partenaire
                     infosImg = "<div class='imgCommerce' style='background-image: url(" + encodeURI(imgUrl) + ")'></div>"; //affichage de l'image du partenaire
@@ -42,6 +44,7 @@ function setInformationCompany(company, url) {
                         infos.innerHTML += "<div id='name'><h2>" + companyCommercial_name + "</h2><div class='statusOpen'><div class='closed'></div><p>Fermé</p></div></div>";//Notification d'ouverture !
                     }
 
+                    /*Heures d'ouverture du partenaire en cours*/
                     infos.innerHTML += getOpened(company[k]['id_company']['hours']['monday']['closed'], "Lundi :", company[k]['id_company']['hours']['monday']['open_hour'], company[k]['id_company']['hours']['monday']['close_hour']);
                     infos.innerHTML += getOpened(company[k]['id_company']['hours']['tuesday']['closed'], "Mardi :", company[k]['id_company']['hours']['tuesday']['open_hour'], company[k]['id_company']['hours']['tuesday']['close_hour']);
                     infos.innerHTML += getOpened(company[k]['id_company']['hours']['wednesday']['closed'], "Mercredi :", company[k]['id_company']['hours']['wednesday']['open_hour'], company[k]['id_company']['hours']['wednesday']['close_hour']);
@@ -54,13 +57,23 @@ function setInformationCompany(company, url) {
 
                     existCompany = true; //permet d'eviter les heures en double ...
                 }
-                if (!companyWebsite.includes("https://")) {
+
+                if (!companyWebsite.includes("https://")) {//format les url en https
                     companyWebsite = "https://" + companyWebsite
                 }
+
                 idUrl = 'link-' + companyWebsite;
+
+                /*Patenaire de la meme catgeorie*/
+                let gridSameCatgeory=document.querySelector("#grid_same__paterns");
+                if(company[k]['id_company']['id_category']['label'] === currentCompanyCategory){//si la categorie du site client est egale a la catgeorie du site de la boucle alors ils font font partie de la meme categorie
+                    gridSameCatgeory.innerHTML += "<a id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
+                }
+
+                /*tout les partenaires*/
                 gridPattern.innerHTML += "<a id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
 
-                reformat_url(idUrl, companyWebsite, 0);
+                reformat_url(idUrl, companyWebsite, 0);//format les url qui ne fonctionne pas http:/// http://www. etc si le format echoue alors on supprimer le liens pour éviter les liens mort
 
             }
         }
@@ -69,8 +82,14 @@ function setInformationCompany(company, url) {
     return true;
 }
 
-function getOpened(isClosed, day, open_at, close_at) {//cette fonction renvoie si le magasin est ouvert ou non
+function getOpened(isClosed, day, open_at, close_at) {//cette fonction renvoie si le magasin est ouvert avec les heures ou non
 
+    if(open_at === null){
+        open_at="Non definis";
+    }
+    if(close_at === null){
+        close_at="Non definis";
+    }
     return isClosed ? "<p>" + day + " fermé</p>" : "<p>" + day + " " + open_at + " - " + close_at + "</p>";
 }
 
@@ -94,7 +113,7 @@ function reformat_url(idUrl, url, tryReformat) {
     let newurl = "";
 
     if (tryReformat <= 4) {
-        fetch(url, { //requete avec les données
+        fetch(url, { //requete sur l'url formatter pour verifier si c'est un liens valide
             mode: "no-cors",
             method: "GET",
             headers: {
@@ -112,7 +131,7 @@ function reformat_url(idUrl, url, tryReformat) {
             }
         }).catch((error) => {
 
-            switch (tryReformat) {
+            switch (tryReformat) {//Essaie different type d'url pour obtenir une url valide....
                 case 1:
                     newurl = "https://www." + url.replace("https://", "");
                     break;
@@ -132,7 +151,7 @@ function reformat_url(idUrl, url, tryReformat) {
                 }
             }
 
-            reformat_url(idUrl, newurl, tryReformat);
+            reformat_url(idUrl, newurl, tryReformat);//fonction recursive permettant de rappeler cette fonction pour essayer d'autre format d'url
         });
     }
 }
@@ -164,7 +183,7 @@ function company_open(currentDay, openHours, closeHours) {//donne l'information 
         let openCloseTotal = convertCloseHours * 3600 + convertCloseMinutes * 60;
 
 
-        if (currentTotalHours >= openHoursTotal && currentTotalHours <= openCloseTotal) {
+        if (currentTotalHours >= openHoursTotal && currentTotalHours <= openCloseTotal) {//si l'heure du client se situe entre l'heure d'ouverture et de fermeture du site actuel alors il est notifier pas un ouver ou fermé
             return true;//Ouvert actuelement
         } else {
             return false;//fermé actuelement
@@ -174,6 +193,4 @@ function company_open(currentDay, openHours, closeHours) {//donne l'information 
     }
 
 }
-
-
 
