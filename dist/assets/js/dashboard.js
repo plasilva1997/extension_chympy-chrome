@@ -2,7 +2,7 @@
 
 get_chrome_value();
 
-let activeClass = document.getElementById("activeOne");
+let activeClass = document.getElementById("activeOne"); //on recupere la classe active
 activeClass.addEventListener("click", ActiveOne); //Ajoute la fonction au boutton submit
 
 let activeClass2 = document.getElementById("activeTwo");
@@ -15,10 +15,10 @@ let GridPaternsSim = document.getElementById("grid__paterns1");
 function ActiveOne() {
     var oldElement = document.getElementById("activeTwo");
     var element = document.getElementById("activeOne");
-    element.classList.add("active");
-    oldElement.classList.remove("active");
-    GridPaternsSim.classList.remove("d-none");
-    GridPaternsAll.classList.add("d-none");
+    element.classList.add("active"); // on ajoute la classe active a la grid 1
+    oldElement.classList.remove("active"); // on retire la classe active a la grid 2
+    GridPaternsSim.classList.remove("d-none"); // on retire la classe d'affichage a la grid 1
+    GridPaternsAll.classList.add("d-none"); // on ajoute la classe d'affichage a la grid 2
 }
 
 function ActiveTwo() {
@@ -49,9 +49,12 @@ function setInformationCompany(company, url) {
 
             if (companyWebsite !== null && companyWebsite !== "") { //si le site web existe
 
+
                 if (url.includes(companyWebsite.replace(/\s/g, '')) && !existCompany) {
 
                     currentCompanyCategory=company[k]['id_company']['id_category']['label'];//categorie actuel du site à laquel se trouve le client
+                    activeClass.classList.remove("d-none"); //affiche le boutton active
+
 
                     /*Informations l'entreprise*/
                     let infosPhoneDiv = document.querySelector("#infosPhone"); //div de l'information du partenaire
