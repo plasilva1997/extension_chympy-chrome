@@ -26,9 +26,10 @@ Ouvrez un terminal dans le dossier du projet et tapez la commande suivante:
 
 ## Screenshots
 
-![app](https://i.imgur.com/L13yBpp.png)
-![app](https://i.imgur.com/dZRHFm6.png)
-![app](https://i.imgur.com/omslPFH.png)
+<img src="https://i.imgur.com/L13yBpp.png" width="200"/>
+<img src="https://i.imgur.com/dZRHFm6.png" width="200"/>
+<img src="https://i.imgur.com/omslPFH.png" width="200"/>
+
 
 ## Collaborateurs
 
