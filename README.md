@@ -27,9 +27,9 @@ Ouvrez un terminal dans le dossier du projet et tapez la commande suivante:
 
 ## Screenshots
 
-![Login](https://i.imgur.com/L13yBpp.png)
-![Dashboard](https://i.imgur.com/dZRHFm6.png)
-![Dashboard](https://i.imgur.com/omslPFH.png)
+![app](https://i.imgur.com/L13yBpp.png)
+![app](https://i.imgur.com/dZRHFm6.png)
+![app](https://i.imgur.com/omslPFH.png)
 
 ## Collaborateurs
 
@@ -37,3 +37,7 @@ Ouvrez un terminal dans le dossier du projet et tapez la commande suivante:
 - [@Antonin Girard](https://github.com/Antonin15-76)
 - [@Julien Mallet](https://github.com/Julien76140)
 - [@Paulo Silva](https://github.com/plasilva1997)
+
+<style>
+ img[alt=app] { width: 300px; }
+</style>
