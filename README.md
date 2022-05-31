@@ -38,5 +38,5 @@ Ouvrez un terminal dans le dossier du projet et tapez la commande suivante:
 - [@Paulo Silva](https://github.com/plasilva1997)
 
 <style>
- img[alt=app] { width: 300px; }
+ img[alt=app] { width: 200px; }
 </style>
