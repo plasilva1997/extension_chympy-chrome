@@ -2,6 +2,15 @@
 
 get_chrome_value();
 
+let activeClass = document.getElementById("activeOne");
+activeClass.addEventListener("click", myFunction); //Ajoute la fonction au boutton submit
+
+function myFunction() {
+    var element = document.getElementById("activeOne");
+    element.classList.add("active");
+}
+
+
 function setInformationCompany(company, url) {
 
     let currentDayName = new Date().toLocaleDateString("en-EN", {weekday: 'long'}).toLowerCase();

@@ -399,3 +399,33 @@ a{
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.btnChoice{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
+}
+
+.btnChoice div {
+    width: 45%;
+    height: 50px;
+    border: #703400 solid 3px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #703400;
+    font-size: 1rem;
+    text-align: center;
+    margin: 25px 0;
+    cursor: pointer;
+}
+
+.active {
+    background-color: #703400;
+    color: #fff !important;
+}
