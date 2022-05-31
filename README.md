@@ -11,9 +11,8 @@ Installer d'abord node sur la machine depuis le site de [NodeJS](https://nodejs.
 
 Ouvrez un terminal dans le dossier du projet et tapez la commande suivante:
 
-```
 ```bash
-  $ npm install
+  $ npm install 
 
 ```
 
