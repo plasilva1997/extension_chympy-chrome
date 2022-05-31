@@ -9,6 +9,9 @@ Project annonceur de 3eme année bachelor informatique chez [Need For School](ht
 
 Installer d'abord node sur la machine depuis le site de [NodeJS](https://nodejs.org/en/)
 
+Ouvrez un terminal dans le dossier du projet et tapez la commande suivante:
+
+```
 ```bash
   $ npm install
 
@@ -21,10 +24,6 @@ Installer d'abord node sur la machine depuis le site de [NodeJS](https://nodejs.
 | Couleur principale| ![#FD9F57](https://via.placeholder.com/10/FD9F57?text=+) #FD9F57 |
 | Example Color | ![#703400](https://via.placeholder.com/10/703400?text=+) #703400 |
 
-## License
-
-[CHYMPY](https://www.chympy.net/)
-
 
 ## Screenshots
 
@@ -32,3 +31,9 @@ Installer d'abord node sur la machine depuis le site de [NodeJS](https://nodejs.
 ![Dashboard](https://i.imgur.com/dZRHFm6.png)
 ![Dashboard](https://i.imgur.com/omslPFH.png)
 
+## Collaborateurs
+
+- [@Benjamin Plesant](https://github.com/Al-Namrood)
+- [@Antonin Girard](https://github.com/Antonin15-76)
+- [@Julien Mallet](https://github.com/Julien76140)
+- [@Paulo Silva](https://github.com/plasilva1997)
