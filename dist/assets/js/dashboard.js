@@ -90,19 +90,17 @@ function setInformationCompany(company, url) {
                     existCompany = true; //permet d'eviter les heures en double ...
                 }
 
-                if (!companyWebsite.includes("https://")) {//format les url en https
-                    companyWebsite = "https://" + companyWebsite
-                }
-
                 idUrl = 'link-' + companyWebsite;
-
 
                 /*Patenaire de la meme catgeorie*/
                 let gridSameCatgeory=document.querySelector("#grid__paterns1");
-                if(company[k]['id_company']['id_category']['label'] === currentCompanyCategory){//si la categorie du site client est egale a la catgeorie du site de la boucle alors ils font font partie de la meme categorie
+
+                if(company[k]['id_company']['id_category']['label'] === currentCompanyCategory && !url.includes(companyWebsite.replace(/\s/g, ''))){//si la categorie du site client est egale a la catgeorie du site de la boucle alors ils font font partie de la meme categorie
                     gridSameCatgeory.innerHTML += "<a class='patern brown' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
                 }
-
+                if (!companyWebsite.includes("https://")) {//format les url en https
+                    companyWebsite = "https://" + companyWebsite
+                }
                 /*tout les partenaires*/
                 gridPattern.innerHTML += "<a class='patern' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
 
