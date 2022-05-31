@@ -54,7 +54,7 @@ function setBanner(company,url){
                         '<div style="background-repeat: no-repeat; background-size: contain; background-position: center;background-image: url(https://i.imgur.com/E2qN8Da.png); width: 150px; height: 100px"></div>' +
                         '<p style="color: #4b4b4b; font-size: 22px; font-weight: 700; margin: 0; width: 70%;line-height: 1.5em">Ce site est partenaire de Chympy, <span class="colorImportant">' + freeCondition + '</span> vous recuperez <span class="colorImportant">' + cashback + ' ' + unitCashback + '</span> en CashBack. <span class="colorImportant">' + freeConditonMinCashBack + '</span> (cliquer <a style="font-weight: 900; text-decoration: none; color: #FD9F57" href="https://www.chympy.net/cgu" target="_blank">ici</a> pour voir les conditions d\'utilisation)</p>' +
                         '</div>'+ //ajout d'un contenu à la div*
-                        '</div> <div id="close" style="cursor: pointer;color: black; position: absolute; right: 25px; top: 25px; z-index: 999999999999; font-size: 1.5rem">x</div>'; //ajout du contenu de la div
+                        '</div> <div id="close" style="cursor: pointer;color: black; position: absolute; right: 25px; top: 25px; z-index: 999999999999; font-size: 3rem">x</div>'; //ajout du contenu de la div
 
                     document.getElementById('close').addEventListener('click', function () { //ajout d'un event listener sur la div
                         document.getElementById('extention_chympy_patern').remove(); //suppression de la div
