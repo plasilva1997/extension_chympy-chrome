@@ -19,7 +19,7 @@ function expires_at(token_at){
     let time = token_at; //recupere le timestamp de l'expiration
     let difference = (currentTime - time) / 1000; //calcul la difference entre le timestamp actuel et le timestamp de l'expiration
 
-    if (difference >= 3580) { //si la difference est superieur a 3580 secondes
+    if (difference >= 86390) { //si la difference est superieur a 3580 secondes
         logout();//on se deconnect quand le token est expiré environ 1 heure
     }
 }

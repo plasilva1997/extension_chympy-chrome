@@ -126,10 +126,9 @@ function getOpened(isClosed, day, open_at, close_at) {//cette fonction renvoie s
 
 
 function get_chrome_value() {
-    chrome.storage.local.get(["company", "urlChrome"], async function (items) { //recuperation des données de l'extension
-
+    chrome.storage.local.get(["company", "urlChrome","token"], function (items) { //recuperation des données de l'extension
         if (items['urlChrome'] !== null && items['urlChrome'] !== undefined) { //si le site web existe
-            const test = await setInformationCompany(JSON.parse(items['company']), items['urlChrome']); //affichage des informations
+            setInformationCompany(JSON.parse(items['company']), items['urlChrome']); //affichage des informations
         } else {
             get_chrome_value();//fonction recurssive tant qu'on a pas l'url
         }
@@ -188,7 +187,6 @@ function reformat_url(idUrl, url, tryReformat) {
 }
 
 function company_open(currentDay, openHours, closeHours) {//donne l'information si le magasin est ouvert en temps réel
-
 
     if (currentDay !== null && openHours !== null && closeHours !== null) {
         /*Heure et minute actuel*/
