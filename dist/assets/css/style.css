@@ -25,6 +25,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 150px;
 }
 input[type=email], input[type=password] {
     width: auto;
@@ -559,5 +560,25 @@ body.dark-mode .container__dashboard .contain .paterns .grid__paterns .patern:ho
 
 body.dark-mode .contain p{
     color: #fff !important;
+}
+
+
+body.dark-mode .form input[type=email], input[type=password] {
+    width: auto;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+    background: none;
+    color: #fff;
+}
+
+body.dark-mode .form input[type=email]::placeholder, body.dark-mode .form input[type=password]::placeholder {
+    color: #fff;
+}
+
+body.dark-mode .form p {
+    color: #fff;
 }
 
