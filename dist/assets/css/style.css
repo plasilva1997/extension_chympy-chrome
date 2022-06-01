@@ -476,3 +476,43 @@ a{
 .d-none{
     display: none !important;
 }
+
+
+body.dark-mode{
+    background-color: #333 !important;
+    color: #fff !important;
+}
+
+body.dark-mode .navbar{
+    background-color: #333 !important;
+    color: #fff !important;
+}
+
+body.dark-mode .container__dashboard .contain #infosCompany #infos #horaires p {
+    color: #fff !important;
+}
+
+body.dark-mode .container__dashboard .contain #infosCompany #infos #infosPhone p {
+    color: #fff !important;
+}
+
+body.dark-mode .container__dashboard .contain .btnChoice div {
+    color: #fff !important;
+}
+
+body.dark-mode .container__dashboard .contain .paterns .grid__paterns1 .patern,
+body.dark-mode .container__dashboard .contain .paterns .grid__paterns .patern{
+    color: #fff !important;
+    background-color: transparent !important;
+}
+
+
+body.dark-mode .container__dashboard .contain .paterns .grid__paterns1 .patern:hover{
+    background-color: #703400 !important;
+    color: #fff !important;
+}
+body.dark-mode .container__dashboard .contain .paterns .grid__paterns .patern:hover{
+    background-color: var(--color-primary) !important;
+    color: #fff !important;
+}
+

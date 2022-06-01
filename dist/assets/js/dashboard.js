@@ -38,7 +38,7 @@ function setInformationCompany(company, url) {
     let gridPattern = document.querySelector("#grid__paterns");
 
     let existCompany = false;
-    let currentCompanyCategory=null;
+    let currentCompanyCategory = null;
 
     for (let k = 0; k < company.length; k++) {  //parcours le tableau de magasins
 
@@ -52,7 +52,7 @@ function setInformationCompany(company, url) {
 
                 if (url.includes(companyWebsite.replace(/\s/g, '')) && !existCompany) {
 
-                    currentCompanyCategory=company[k]['id_company']['id_category']['label'];//categorie actuel du site à laquel se trouve le client
+                    currentCompanyCategory = company[k]['id_company']['id_category']['label'];//categorie actuel du site à laquel se trouve le client
                     activeClass.classList.remove("d-none"); //affiche le boutton active
 
 
@@ -93,9 +93,9 @@ function setInformationCompany(company, url) {
                 idUrl = 'link-' + companyWebsite;
 
                 /*Patenaire de la meme catgeorie*/
-                let gridSameCatgeory=document.querySelector("#grid__paterns1");
+                let gridSameCatgeory = document.querySelector("#grid__paterns1");
 
-                if(company[k]['id_company']['id_category']['label'] === currentCompanyCategory && !url.includes(companyWebsite.replace(/\s/g, ''))){//si la categorie du site client est egale a la catgeorie du site de la boucle alors ils font font partie de la meme categorie
+                if (company[k]['id_company']['id_category']['label'] === currentCompanyCategory && !url.includes(companyWebsite.replace(/\s/g, ''))) {//si la categorie du site client est egale a la catgeorie du site de la boucle alors ils font font partie de la meme categorie
                     gridSameCatgeory.innerHTML += "<a class='patern brown' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
                 }
                 if (!companyWebsite.includes("https://")) {//format les url en https
@@ -115,11 +115,11 @@ function setInformationCompany(company, url) {
 
 function getOpened(isClosed, day, open_at, close_at) {//cette fonction renvoie si le magasin est ouvert avec les heures ou non
 
-    if(open_at === null){
-        open_at="Non definis";
+    if (open_at === null) {
+        open_at = "Non definis";
     }
-    if(close_at === null){
-        close_at="Non definis";
+    if (close_at === null) {
+        close_at = "Non definis";
     }
     return isClosed ? "<p>" + day + " fermé</p>" : "<p>" + day + " " + open_at + " - " + close_at + "</p>";
 }
@@ -224,4 +224,3 @@ function company_open(currentDay, openHours, closeHours) {//donne l'information 
     }
 
 }
-
