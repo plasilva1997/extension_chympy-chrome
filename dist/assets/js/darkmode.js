@@ -8,15 +8,8 @@ function dark_mode() {
     checkDarkMode = localStorage.getItem("darkMode"); //recuperation du darkmode dans le localstorage
     if (checkDarkMode === undefined || checkDarkMode === "false") {
         localStorage.setItem("darkMode", "true"); //ajoute le darkmode a true dans le localstorage
-        chrome.browserAction.setBadgeText({
-            'text': 'on' //ajoute le texte "on" dans le badge
-        });
     } else {
         localStorage.setItem("darkMode", "false");
-        chrome.browserAction.setBadgeText({
-            'text': 'off' //ajoute le texte "off" dans le badge
-        });
-
     }
     setDarkmode(); //appel de la fonction setDarkmode
 }

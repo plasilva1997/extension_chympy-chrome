@@ -520,7 +520,7 @@ a{
     align-items: start;
 }
 
-.nav2{
+.navBarNav{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -532,7 +532,7 @@ a{
     -ms-flex-align: start;
     align-items: start;
     gap: 10px;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 @-webkit-keyframes isOpen {
