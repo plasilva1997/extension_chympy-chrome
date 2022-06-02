@@ -22,7 +22,6 @@ function setDarkmode() {
         darkMode.classList.add("icon_on"); //ajoute la class icon_on
         lougoutIcon.classList.remove("lougout-dm-actif"); //supprime la class lougout-dm-actif
 
-
     } else {
         document.body.classList.add("dark-mode"); //ajoute la class dark-mode
         darkMode.classList.remove("icon_on"); //supprime la class icon_on
