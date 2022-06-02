@@ -10,6 +10,7 @@ function init_logout(){
 
 function logout(){//supprime toute les infos pour la deconnexion
     chrome.storage.local.clear(function() { //supprime toute les infos
+        chrome.browserAction.setIcon({path: '/dist/assets/img/off.png'});
         window.location.replace("./index.html"); //redirection vers la page d'accueil
     });
 }

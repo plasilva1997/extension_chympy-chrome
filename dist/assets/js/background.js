@@ -2,12 +2,16 @@
 
 const urlAPI="https://chympy.net/api/";
 
+
 function get_chrome_value() {
 
     let currentURL=window.location.href; //recupere l'url de la page
 
     chrome.storage.local.get(["company", "urlChrome","token"], function (items) { //recupere les données stockées dans le local storage
         if(items['token'] !== undefined) {
+
+            chrome.browserAction.setIcon({path: '/dist/assets/img/on.png'});
+
             if (items['urlChrome'] !== null && items['urlChrome'] !== undefined && currentURL === items['urlChrome']) { //verifie si l'url de la page est la meme que celle stockée dans le local storage
                 setBanner(JSON.parse(items['company']), items['urlChrome']); //appel de la fonction setBanner
             } else {
@@ -71,8 +75,6 @@ function setBanner(company,url){
         }
     }
 }
-
-
 
 
 
