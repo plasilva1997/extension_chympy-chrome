@@ -1,4 +1,5 @@
 /*POUR LE DOM DE LA PAGE*/
+
 const urlAPI="https://chympy.net/api/";
 
 function get_chrome_value() {

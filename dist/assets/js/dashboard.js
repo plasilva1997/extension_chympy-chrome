@@ -129,7 +129,6 @@ function get_chrome_value() {
     chrome.storage.local.get(["company", "urlChrome","token"], function (items) { //recuperation des données de l'extension
         if (items['urlChrome'] !== null && items['urlChrome'] !== undefined) { //si le site web existe
             setInformationCompany(JSON.parse(items['company']), items['urlChrome']); //affichage des informations
-            notification(JSON.parse(items["company"]));
         } else {
             get_chrome_value();//fonction recurssive tant qu'on a pas l'url
         }
