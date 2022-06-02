@@ -143,6 +143,9 @@ function setInformationCompany(company, url, lastConnexion) {
 
                 let Lastoffer = dateOffersTimestamp;
                 let LastConnectionCurrent = lastConnexion;
+                if (!companyWebsite.includes("https://")) {//format les url en https
+                    companyWebsite = "https://" + companyWebsite
+                }
                 if(lastConnexion < Lastoffer){
                     activeClass3.classList.remove("d-none");
                     gridNewOffers.innerHTML += "<a class='patern brow' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
