@@ -5,6 +5,9 @@ let lougoutIcon = document.getElementById("logout"); //recuperation du bouton lo
 
 
 function dark_mode() {
+
+
+
     checkDarkMode = localStorage.getItem("darkMode"); //recuperation du darkmode dans le localstorage
     if (checkDarkMode === undefined || checkDarkMode === "false") {
         localStorage.setItem("darkMode", "true");
@@ -32,3 +35,4 @@ function setDarkmode() {
 }
 
 setDarkmode();
+

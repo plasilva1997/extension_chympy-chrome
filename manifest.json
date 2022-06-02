@@ -5,11 +5,12 @@
   "permissions": ["activeTab", "all_urls","tabs","storage"],
   "browser_action": {"default_popup": "dist/index.html"},
   "content_scripts":[{
-    "matches": ["https://*/*"],
-    "js": ["dist/assets/js/background.js"]
+    "matches": ["https://*/*","http://*/*"],
+    "js": ["dist/assets/js/background.js","dist/assets/js/notification.js"]
   }],
   "icons": {
-    "64" : "dist/assets/img/on.png"
+    "64" : "dist/assets/img/off.png"
   },
-  "content_security_policy":"script-src 'self'  'unsafe-inline' 'unsafe eval'  https://apis.google.com/js/client.js?; object-src 'self'"
+  "content_security_policy":"script-src 'self' 'unsafe-inline' 'unsafe eval'  https://apis.google.com/js/client.js?; object-src 'self'",
+  "background": {"scripts": ["dist/assets/js/background.js","dist/assets/js/notification.js"]}
 }
