@@ -138,7 +138,7 @@ function setInformationCompany(company, url, lastConnexion) {
 
                 let gridNewOffers = document.querySelector("#grid__new__paterns");
 
-                const dateOffers = new Date(company[k]['created_at']);
+                const dateOffers = new Date(company[k]['id_company']['created_at']);
                 const dateOffersTimestamp = dateOffers.getTime();
 
                 let Lastoffer = dateOffersTimestamp;
