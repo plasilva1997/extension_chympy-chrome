@@ -152,7 +152,6 @@ a{
     display: none;
     position: absolute;
     z-index: 1;
-    background-color: rgb(255 255 255);
 }
 .item{
     display: -ms-grid;
