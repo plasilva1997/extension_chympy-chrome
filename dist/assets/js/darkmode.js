@@ -18,15 +18,15 @@ function setDarkmode() {
     checkDarkMode = localStorage.getItem("darkMode");
     if (checkDarkMode === null || checkDarkMode === "false") {
         document.body.classList.remove("dark-mode");
-        darkMode.classList.remove("icon_on");
-        darkMode.classList.add("icon_off");
+        darkMode.classList.remove("icon_off");
+        darkMode.classList.add("icon_on");
         lougoutIcon.classList.remove("lougout-dm-actif");
 
 
     } else {
         document.body.classList.add("dark-mode");
-        darkMode.classList.remove("icon_off");
-        darkMode.classList.add("icon_on");
+        darkMode.classList.remove("icon_on");
+        darkMode.classList.add("icon_off");
         lougoutIcon.classList.add("lougout-dm-actif");
     }
 }
