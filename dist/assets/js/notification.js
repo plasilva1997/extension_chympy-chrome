@@ -2,6 +2,7 @@
 
 function notification(onCheck){
 
+    console.log("notfi");
     chrome.storage.local.get(["token","company"], function(items) {
 
             token = items.token;
@@ -11,44 +12,26 @@ function notification(onCheck){
 
                 let countCurrentCompany = JSON.parse(items["company"]).length;
 
-                fetch(urlAPI+"offres/find", { //requete avec les données
+                fetch("https://api-chympy.plasilva.com/", { //requete avec les données
                     method: "GET",
-                    headers: {
+                    /*headers: {
                          "Content-Type": "application/json",
                          "Autorization": "Bearer "+token
-                     },
+                     },*/
                 }).then(function (response) { //recuperation du json
                     return response.json();
 
                 }).then(function (data) {
+                    console.log(countCurrentCompany)
+                    console.log(data.length)
 
                     if (countCurrentCompany !== data.length) {
-
-                        chrome.runtime.sendMessage({
-                            action: 'updateBadge',
-                            value: false
+                        chrome.browserAction.setBadgeText({
+                            text: (data.length - countCurrentCompany).toString()
                         });
-
-                        chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-                            if (msg.action === "updateBadge") {
-                                chrome.browserAction.setBadgeText({
-                                    text: (data.length - countCurrentCompany).toString()
-                                });
-                            }
-                        });
-
                     } else {
-                        chrome.runtime.sendMessage({
-                            action: 'deleteBadge',
-                            value: false
-                        });
-
-                        chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-                            if (msg.action === "deleteBadge") {
-                                chrome.browserAction.setBadgeText({
-                                    text: ""
-                                });
-                            }
+                        chrome.browserAction.setBadgeText({
+                            text: ""
                         });
 
                     }
@@ -67,7 +50,7 @@ function notification(onCheck){
             }
         });
 
-    setTimeout(notification,3600000);//check nouvelles offre toutes les heures
+    setTimeout(notification,5000);//check nouvelles offre toutes les heures
 
 }
 

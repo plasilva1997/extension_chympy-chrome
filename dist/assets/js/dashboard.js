@@ -33,7 +33,7 @@ function ActiveTwo() {
 }
 
 
-function setInformationCompany(company, url) {
+function setInformationCompany(company, url, lastConnexion) {
 
     chrome.browserAction.setIcon({path: '/dist/assets/img/on.png'});
 
@@ -41,8 +41,11 @@ function setInformationCompany(company, url) {
 
     let gridPattern = document.querySelector("#grid__paterns");
 
+    let isNewOffers=false;
     let existCompany = false;
     let currentCompanyCategory = null;
+    let gridNewOffers=document.querySelector("#grid__newpattern");
+    let buttonNewOffers=document.querySelector("#activeThree");
 
     for (let k = 0; k < company.length; k++) {  //parcours le tableau de magasins
 
@@ -102,6 +105,16 @@ function setInformationCompany(company, url) {
                 if (company[k]['id_company']['id_category']['label'] === currentCompanyCategory && !url.includes(companyWebsite.replace(/\s/g, ''))) {//si la categorie du site client est egale a la catgeorie du site de la boucle alors ils font font partie de la meme categorie
                     gridSameCatgeory.innerHTML += "<a class='patern brown' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
                 }
+
+                const dateOffers = new Date(company[k]['id_company']['created_at']);
+                const dateOffersTimestamp = dateOffers.getTime();
+
+                if(parseInt(dateOffersTimestamp)>parseInt(lastConnexion)){
+                    gridNewOffers.classList.remove("d-none");
+                    buttonNewOffers.classList.remove("d-none");
+                    gridNewOffers.innerHTML += "<a class='patern brown' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
+                }
+
                 if (!companyWebsite.includes("https://")) {//format les url en https
                     companyWebsite = "https://" + companyWebsite
                 }
@@ -113,7 +126,6 @@ function setInformationCompany(company, url) {
             }
         }
     }
-
     return true;
 }
 
@@ -130,9 +142,9 @@ function getOpened(isClosed, day, open_at, close_at) {//cette fonction renvoie s
 
 
 function get_chrome_value() {
-    chrome.storage.local.get(["company", "urlChrome","token"], function (items) { //recuperation des données de l'extension
+    chrome.storage.local.get(["company", "urlChrome","token","token_at"], function (items) { //recuperation des données de l'extension
         if (items['urlChrome'] !== null && items['urlChrome'] !== undefined) { //si le site web existe
-            setInformationCompany(JSON.parse(items['company']), items['urlChrome']); //affichage des informations
+            setInformationCompany(JSON.parse(items['company']), items['urlChrome'], items['token_at']); //affichage des informations
         } else {
             get_chrome_value();//fonction recurssive tant qu'on a pas l'url
         }
