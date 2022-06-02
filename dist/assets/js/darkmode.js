@@ -7,28 +7,35 @@ let lougoutIcon = document.getElementById("logout"); //recuperation du bouton lo
 function dark_mode() {
     checkDarkMode = localStorage.getItem("darkMode"); //recuperation du darkmode dans le localstorage
     if (checkDarkMode === undefined || checkDarkMode === "false") {
-        localStorage.setItem("darkMode", "true");
+        localStorage.setItem("darkMode", "true"); //ajoute le darkmode a true dans le localstorage
+        chrome.browserAction.setBadgeText({
+            'text': 'on' //ajoute le texte "on" dans le badge
+        });
     } else {
         localStorage.setItem("darkMode", "false");
+        chrome.browserAction.setBadgeText({
+            'text': 'off' //ajoute le texte "off" dans le badge
+        });
+
     }
-    setDarkmode();
+    setDarkmode(); //appel de la fonction setDarkmode
 }
 
 function setDarkmode() {
-    checkDarkMode = localStorage.getItem("darkMode");
-    if (checkDarkMode === null || checkDarkMode === "false") {
-        document.body.classList.remove("dark-mode");
-        darkMode.classList.remove("icon_off");
-        darkMode.classList.add("icon_on");
-        lougoutIcon.classList.remove("lougout-dm-actif");
+    checkDarkMode = localStorage.getItem("darkMode"); //recuperation du darkmode dans le localstorage
+    if (checkDarkMode === null || checkDarkMode === "false") { //si le darkmode est false
+        document.body.classList.remove("dark-mode"); //supprime la class dark-mode
+        darkMode.classList.remove("icon_off"); //supprime la class icon_off
+        darkMode.classList.add("icon_on"); //ajoute la class icon_on
+        lougoutIcon.classList.remove("lougout-dm-actif"); //supprime la class lougout-dm-actif
 
 
     } else {
-        document.body.classList.add("dark-mode");
-        darkMode.classList.remove("icon_on");
-        darkMode.classList.add("icon_off");
-        lougoutIcon.classList.add("lougout-dm-actif");
+        document.body.classList.add("dark-mode"); //ajoute la class dark-mode
+        darkMode.classList.remove("icon_on"); //supprime la class icon_on
+        darkMode.classList.add("icon_off"); //ajoute la class icon_off
+        lougoutIcon.classList.add("lougout-dm-actif"); //ajoute la class lougout-dm-actif
     }
 }
 
-setDarkmode();
+setDarkmode(); //appel de la fonction setDarkmode
