@@ -1,16 +1,22 @@
 /*POUR LE DOM DE LA PAGE*/
 
+const urlAPI="https://chympy.net/api/";
+
 function get_chrome_value() {
 
     let currentURL=window.location.href; //recupere l'url de la page
 
-    chrome.storage.local.get(["company", "urlChrome"], function (items) { //recupere les données stockées dans le local storage
-
-        if (items['urlChrome'] !== null && items['urlChrome'] !== undefined && currentURL === items['urlChrome']) { //verifie si l'url de la page est la meme que celle stockée dans le local storage
-            setBanner(JSON.parse(items['company']), items['urlChrome']); //appel de la fonction setBanner
-        } else {
-            chrome.storage.local.set({urlChrome: currentURL}, function() {});//on stock l'url actuel
-            get_chrome_value();//fonction recurssive tant qu'on a pas l'url
+    chrome.storage.local.get(["company", "urlChrome","token"], function (items) { //recupere les données stockées dans le local storage
+        if(items['token'] !== undefined) {
+            if (items['urlChrome'] !== null && items['urlChrome'] !== undefined && currentURL === items['urlChrome']) { //verifie si l'url de la page est la meme que celle stockée dans le local storage
+                setBanner(JSON.parse(items['company']), items['urlChrome']); //appel de la fonction setBanner
+            } else {
+                chrome.storage.local.set({urlChrome: currentURL}, function () {
+                });//on stock l'url actuel
+                get_chrome_value();//fonction recurssive tant qu'on a pas l'url
+            }
+        }else{
+            return;
         }
     });
 }
@@ -65,6 +71,7 @@ function setBanner(company,url){
         }
     }
 }
+
 
 
 
