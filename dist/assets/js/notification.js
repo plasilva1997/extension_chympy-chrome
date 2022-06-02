@@ -23,12 +23,32 @@ function notification(onCheck){
                 }).then(function (data) {
 
                     if (countCurrentCompany !== data.length) {
-                        chrome.browserAction.setBadgeText({
-                            text: (data.length - countCurrentCompany).toString()
+
+                        chrome.runtime.sendMessage({
+                            action: 'updateBadge',
+                            value: false
                         });
+
+                        chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+                            if (msg.action === "updateBadge") {
+                                chrome.browserAction.setBadgeText({
+                                    text: (data.length - countCurrentCompany).toString()
+                                });
+                            }
+                        });
+
                     } else {
-                        chrome.browserAction.setBadgeText({
-                            text: ""
+                        chrome.runtime.sendMessage({
+                            action: 'deleteBadge',
+                            value: false
+                        });
+
+                        chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+                            if (msg.action === "deleteBadge") {
+                                chrome.browserAction.setBadgeText({
+                                    text: ""
+                                });
+                            }
                         });
 
                     }
