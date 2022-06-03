@@ -50,7 +50,7 @@ function notification(onCheck){
             }
         });
 
-    setTimeout(notification,5000);//check nouvelles offre toutes les heures
+    setTimeout(notification,3600000); //on relance la requete toutes les heures
 
 }
 
