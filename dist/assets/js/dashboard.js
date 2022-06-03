@@ -1,8 +1,6 @@
 /*DASHBOARD DE LEXTENSION*/
 
-get_chrome_value();
-
-notification(true);
+setTimeout(get_chrome_value, 250);
 
 let activeClass = document.getElementById("activeOne"); //on recupere la classe active
 activeClass.addEventListener("click", ActiveOne); //Ajoute la fonction au boutton submit
@@ -147,7 +145,9 @@ function setInformationCompany(company, url, lastConnexion) {
                     companyWebsite = "https://" + companyWebsite
                 }
                 if(lastConnexion < Lastoffer){
+                    console.log("new offer");
                     activeClass3.classList.remove("d-none");
+                    activeClass3.addEventListener("click", function () {notification(true);});
                     gridNewOffers.innerHTML += "<a class='patern brow' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
                 }
 

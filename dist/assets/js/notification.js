@@ -20,28 +20,27 @@ function notification(onCheck){
                      },*/
                 }).then(function (response) { //recuperation du json
                     return response.json();
-
+                    // location.reload();
                 }).then(function (data) {
                     console.log(countCurrentCompany)
                     console.log(data.length)
 
-                    if (countCurrentCompany !== data.length) {
+                    if (countCurrentCompany !== data.length && data.length-countCurrentCompany>0) {
                         chrome.browserAction.setBadgeText({
                             text: (data.length - countCurrentCompany).toString()
                         });
-                    } else {
-                        chrome.browserAction.setBadgeText({
-                            text: ""
-                        });
-
                     }
 
                     if(onCheck){
-                        chrome.storage.local.set({company: JSON.stringify(data)}, function() {});
+                        chrome.browserAction.setBadgeText({
+                            text: ""
+                        });
                     }
+                    chrome.storage.local.set({company: JSON.stringify(data)}, function() {});
+
 
                 }).catch((error) => { //si il y a une erreur on redirige vers la page d'accueil
-                    console.log(error)
+                    console.log(error);
                 });
             } else {
                 chrome.browserAction.setBadgeText({
@@ -50,7 +49,7 @@ function notification(onCheck){
             }
         });
 
-    setTimeout(notification,3600000); //on relance la requete toutes les heures
+    setTimeout(notification,10000000000); //on relance la requete toutes les heures
 
 }
 
