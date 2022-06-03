@@ -157,7 +157,7 @@ function setInformationCompany(company, url, lastConnexion) {
                 /*tout les partenaires*/
                 gridPattern.innerHTML += "<a class='patern' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
 
-                reformat_url(idUrl, companyWebsite, 0);//format les url qui ne fonctionne pas http:/// http://www. etc si le format echoue alors on supprimer le liens pour éviter les liens mort
+                //reformat_url(idUrl, companyWebsite, 0);//format les url qui ne fonctionne pas http:/// http://www. etc si le format echoue alors on supprimer le liens pour éviter les liens mort
 
             }
         }
@@ -180,6 +180,7 @@ function getOpened(isClosed, day, open_at, close_at) {//cette fonction renvoie s
 function get_chrome_value() {
     chrome.storage.local.get(["company", "urlChrome","token","token_at"], function (items) { //recuperation des données de l'extension
         if (items['urlChrome'] !== null && items['urlChrome'] !== undefined) { //si le site web existe
+            console.log(JSON.parse(items['company']));
             setInformationCompany(JSON.parse(items['company']), items['urlChrome'], items['token_at']); //affichage des informations
         } else {
             get_chrome_value();//fonction recurssive tant qu'on a pas l'url
@@ -188,55 +189,55 @@ function get_chrome_value() {
 
 }
 
-function reformat_url(idUrl, url, tryReformat) {
-
-    let link = document.getElementById(idUrl);
-    tryReformat++;
-    let newurl = "";
-
-    if (tryReformat <= 4) {
-        fetch(url, { //requete sur l'url formatter pour verifier si c'est un liens valide
-            mode: "no-cors",
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
-        }).then(function (response) {
-            link = document.getElementById(idUrl);
-            link.setAttribute("href", url);
-            tryReformat = 0;
-
-            if (response.status !== 200 || response.status === 0) {//si c'est pas une 200 ou si c'est une cors alors on affiche pas le liens
-                if (link !== null) {
-                    link.style.display = "none";
-                }
-            }
-        }).catch((error) => {
-
-            switch (tryReformat) {//Essaie different type d'url pour obtenir une url valide....
-                case 1:
-                    newurl = "https://www." + url.replace("https://", "");
-                    break;
-                case 2:
-                    newurl = "http://" + url.replace("https://www.", "");
-                    break;
-                case 3:
-                    newurl = "http://www." + url.replace("http://", "");
-                    break;
-                default:
-                    newurl = url;
-            }
-
-            if (tryReformat === 4) {
-                if (link != null) {
-                    link.style.display = "none";
-                }
-            }
-
-            reformat_url(idUrl, newurl, tryReformat);//fonction recursive permettant de rappeler cette fonction pour essayer d'autre format d'url
-        });
-    }
-}
+// function reformat_url(idUrl, url, tryReformat) {
+//
+//     let link = document.getElementById(idUrl);
+//     tryReformat++;
+//     let newurl = "";
+//
+//     if (tryReformat <= 4) {
+//         fetch(url, { //requete sur l'url formatter pour verifier si c'est un liens valide
+//             mode: "no-cors",
+//             method: "GET",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//         }).then(function (response) {
+//             link = document.getElementById(idUrl);
+//             link.setAttribute("href", url);
+//             tryReformat = 0;
+//
+//             if (response.status !== 200 || response.status === 0) {//si c'est pas une 200 ou si c'est une cors alors on affiche pas le liens
+//                 if (link !== null) {
+//                     link.style.display = "none";
+//                 }
+//             }
+//         }).catch((error) => {
+//
+//             switch (tryReformat) {//Essaie different type d'url pour obtenir une url valide....
+//                 case 1:
+//                     newurl = "https://www." + url.replace("https://", "");
+//                     break;
+//                 case 2:
+//                     newurl = "http://" + url.replace("https://www.", "");
+//                     break;
+//                 case 3:
+//                     newurl = "http://www." + url.replace("http://", "");
+//                     break;
+//                 default:
+//                     newurl = url;
+//             }
+//
+//             if (tryReformat === 4) {
+//                 if (link != null) {
+//                     link.style.display = "none";
+//                 }
+//             }
+//
+//             reformat_url(idUrl, newurl, tryReformat);//fonction recursive permettant de rappeler cette fonction pour essayer d'autre format d'url
+//         });
+//     }
+// }
 
 function company_open(currentDay, openHours, closeHours) {//donne l'information si le magasin est ouvert en temps réel
 
