@@ -794,6 +794,7 @@ div#horaires p {
     color: black;
     border: #bd5800 2px solid;
     border-radius: 5px;
+    width: 50%;
 }
 
 body.dark-mode .container__dashboard .contain #choiceCategory select{
@@ -802,4 +803,5 @@ body.dark-mode .container__dashboard .contain #choiceCategory select{
     color: white;
     background-color: #bd5800;
     border-radius: 5px;
+    width: 50%;
 }
