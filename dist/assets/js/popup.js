@@ -79,11 +79,13 @@ function getCategory() {
         let fetchCategorty = fetchApi("categorie/find", 'GET', token, '');
 
         fetchCategorty.then((data) => {
-            if (data !== null && data !== undefined){
-                chrome.storage.local.set({category : JSON.stringify(data)}, function (){});
+            if (data !== null && data !== undefined) {
+                chrome.storage.local.set({category: JSON.stringify(data)}, function () {
+                });
 
             }
-    });
+        });
+    })
 }
 
 set_chrome_url();
