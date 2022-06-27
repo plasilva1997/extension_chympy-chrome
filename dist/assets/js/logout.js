@@ -25,7 +25,6 @@ function expires_at(token_at){
     }
 }
 
-
 function check_expires_at() {//recupere le timestamp d'expiratrion et effectue une verification avec la fonction expires_at
     chrome.storage.local.get(["token_at"], function (items) { //recupere le timestamp d'expiration
         expires_at(items["token_at"]); //lance la verification

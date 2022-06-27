@@ -1,4 +1,4 @@
-function fetchApi(root, method, token, bodyValue) {
+function fetchApi(root, method, token, bodyValue) { // cette function permet d'être appelé dans d'autres fichiers js
 
     let url = "https://chympy.net/api/" + root;
     let header = '';
@@ -32,7 +32,6 @@ function fetchApi(root, method, token, bodyValue) {
         };
     }
 
-    console.log(headers);
     let result = fetch(url, headers).then(function (response) {
         return response.json();
     }).then(function (data) {
@@ -53,4 +52,3 @@ function set_chrome_url(){
         }
     });
 }
-

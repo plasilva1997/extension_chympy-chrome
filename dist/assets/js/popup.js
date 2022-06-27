@@ -31,7 +31,6 @@ function login() {
 
     let callLogin = fetchApi("particuliers/login", 'POST', '', bodyValue);//requete avec les données
     callLogin.then((data) => {
-        console.log(data);
         if (data['success'] !== false) {
             form.style.display = "none"; //Cache le login si on est connecté
             chrome.storage.local.set({token: data['token']}, function () {
@@ -49,10 +48,6 @@ function login() {
     });
     loading.style.display = "flex"; //Affiche le loader
 }
-
-
-
-
 
 function getCompany() {
 
@@ -83,19 +78,12 @@ function getCategory() {
 
         let fetchCategorty = fetchApi("categorie/find", 'GET', token, '');
 
-        console.log(fetchCategorty)
         fetchCategorty.then((data) => {
             if (data !== null && data !== undefined){
                 chrome.storage.local.set({category : JSON.stringify(data)}, function (){});
 
-            } else {
-                console.log("Une erreur s'est produite lors de la recupération des catégories");
             }
-        })
     });
 }
 
-
-
 set_chrome_url();
-

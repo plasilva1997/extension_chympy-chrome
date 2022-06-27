@@ -2,8 +2,6 @@
 
 const urlAPI="https://chympy.net/api/";
 
-
-
 function get_chrome_value() {
 
     let currentURL=window.location.href; //recupere l'url de la page

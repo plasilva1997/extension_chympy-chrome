@@ -3,7 +3,6 @@ darkMode.addEventListener("click", dark_mode); //ajout d'un evenement au click d
 let checkDarkMode = localStorage.getItem("darkMode"); //recuperation du darkmode dans le localstorage
 let lougoutIcon = document.getElementById("logout"); //recuperation du bouton logout
 
-
 function dark_mode() {
     checkDarkMode = localStorage.getItem("darkMode"); //recuperation du darkmode dans le localstorage
     if (checkDarkMode === undefined || checkDarkMode === "false") {
