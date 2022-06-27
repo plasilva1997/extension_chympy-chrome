@@ -786,4 +786,20 @@ div#horaires p {
 
 #choiceCategory{
     margin-top: 25px;
+
+}
+#choiceCategory select{
+    font-size: .9rem;
+    padding: 5px 5px;
+    color: black;
+    border: #bd5800 2px solid;
+    border-radius: 5px;
+}
+
+body.dark-mode .container__dashboard .contain #choiceCategory select{
+    font-size: .9rem;
+    padding: 5px 5px;
+    color: white;
+    background-color: #bd5800;
+    border-radius: 5px;
 }
