@@ -11,7 +11,7 @@ activeClass2.addEventListener("click", ActiveTwo);
 let activeClass3 = document.getElementById("activeThree");
 activeClass3.addEventListener("click", ActiveThree);
 
-
+let selectCategoryDisplay = document.querySelector("#choiceCategory");
 
 function ActiveOne() {
     var oldElement2 = document.getElementById("activeTwo");
@@ -26,6 +26,7 @@ function ActiveOne() {
     grid1.classList.remove("d-none"); // on ajoute la classe d'affichage a la grid 1
     grid2.classList.add("d-none"); // on retire la classe d'affichage a la grid 2
     grid3.classList.add("d-none"); // on ajoute la classe d'affichage a la grid 3
+    selectCategoryDisplay.classList.add("d-none");
 }
 
 function ActiveTwo() {
@@ -41,7 +42,7 @@ function ActiveTwo() {
     grid1.classList.add("d-none"); // on ajoute la classe d'affichage a la grid 1
     grid2.classList.remove("d-none"); // on retire la classe d'affichage a la grid 2
     grid3.classList.add("d-none"); // on ajoute la classe d'affichage a la grid 3
-
+    selectCategoryDisplay.classList.remove("d-none");
 }
 
 function ActiveThree() {
@@ -57,22 +58,28 @@ function ActiveThree() {
     grid1.classList.add("d-none"); // on ajoute la classe d'affichage a la grid 1
     grid2.classList.add("d-none"); // on retire la classe d'affichage a la grid 2
     grid3.classList.remove("d-none"); // on ajoute la classe d'affichage a la grid 3
+    selectCategoryDisplay.classList.remove("d-none");
 }
 
-
-function setInformationCompany(company, url, lastConnexion) {
+function setInformationCompany(company, url, lastConnexion, categoryName) {
 
     chrome.browserAction.setIcon({path: '/dist/assets/img/on.png'});
 
     let currentDayName = new Date().toLocaleDateString("en-EN", {weekday: 'long'}).toLowerCase();
-
     let gridPattern = document.querySelector("#grid__paterns");
-
-    let isNewOffers=false;
+    let isNewOffers = false;
     let existCompany = false;
     let currentCompanyCategory = null;
-    let gridNewOffers=document.querySelector("#grid__newpattern");
-    let buttonNewOffers=document.querySelector("#activeThree");
+    let gridNewOffers = document.querySelector("#grid__newpattern");
+    let buttonNewOffers = document.querySelector("#activeThree");
+    let selectCategory = document.querySelector("#categorie-select");
+
+    for (let c = 0; c < categoryName.length; c++) {
+        console.log(categoryName[c].label);
+        selectCategory.innerHTML += "<option value='" + categoryName[c]._id + "'>" + categoryName[c].label + "</option>"
+    }
+
+    selectCategory.addEventListener('change', loadstoreselected)
 
     for (let k = 0; k < company.length; k++) {  //parcours le tableau de magasins
 
@@ -133,7 +140,6 @@ function setInformationCompany(company, url, lastConnexion) {
                     gridSameCatgeory.innerHTML += "<a class='patern brown' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
                 }
 
-
                 let gridNewOffers = document.querySelector("#grid__new__paterns");
 
                 const dateOffers = new Date(company[k]['id_company']['created_at']);
@@ -144,18 +150,20 @@ function setInformationCompany(company, url, lastConnexion) {
                 if (!companyWebsite.includes("https://")) {//format les url en https
                     companyWebsite = "https://" + companyWebsite
                 }
-                if(lastConnexion < Lastoffer){
+                if (lastConnexion < Lastoffer) {
                     console.log("new offer");
                     activeClass3.classList.remove("d-none");
-                    activeClass3.addEventListener("click", function () {notification(true);});
-                    gridNewOffers.innerHTML += "<a class='patern brow' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
+                    activeClass3.addEventListener("click", function () {
+                        notification(true);
+                    });
+                    gridNewOffers.innerHTML += "<a class='patern brow " + company[k]['id_company']['id_category']['_id'] + " store' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
                 }
 
                 if (!companyWebsite.includes("https://")) {//format les url en https
                     companyWebsite = "https://" + companyWebsite
                 }
                 /*tout les partenaires*/
-                gridPattern.innerHTML += "<a class='patern' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
+                gridPattern.innerHTML += "<a class='patern " + company[k]['id_company']['id_category']['_id'] + " store' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
 
                 //reformat_url(idUrl, companyWebsite, 0);//format les url qui ne fonctionne pas http:/// http://www. etc si le format echoue alors on supprimer le liens pour éviter les liens mort
 
@@ -176,12 +184,34 @@ function getOpened(isClosed, day, open_at, close_at) {//cette fonction renvoie s
     return isClosed ? "<p>" + day + " fermé</p>" : "<p>" + day + " " + open_at + " - " + close_at + "</p>";
 }
 
+function loadstoreselected(e) {
+
+    let categoryID = e.target.value;
+    let store = document.getElementsByClassName('store');
+
+    for (let r = 0; r < store.length; r++) {
+        console.log(store[r].className);
+        if (categoryID === 'tout') {
+            store[r].classList.remove('d-none');
+        } else {
+            if (!store[r].className.includes(categoryID)) {
+                store[r].classList.add('d-none');
+                console.log(store[r].className);
+
+            } else {
+                store[r].classList.remove('d-none');
+            }
+        }
+
+    }
+
+}
 
 function get_chrome_value() {
-    chrome.storage.local.get(["company", "urlChrome","token","token_at"], function (items) { //recuperation des données de l'extension
+    chrome.storage.local.get(["company", "urlChrome", "token", "token_at", "category"], function (items) { //recuperation des données de l'extension
         if (items['urlChrome'] !== null && items['urlChrome'] !== undefined) { //si le site web existe
-            console.log(JSON.parse(items['company']));
-            setInformationCompany(JSON.parse(items['company']), items['urlChrome'], items['token_at']); //affichage des informations
+            console.log(items)
+            setInformationCompany(JSON.parse(items['company']), items['urlChrome'], items['token_at'], JSON.parse(items['category'])); //affichage des informations
         } else {
             get_chrome_value();//fonction recurssive tant qu'on a pas l'url
         }
@@ -275,3 +305,4 @@ function company_open(currentDay, openHours, closeHours) {//donne l'information 
     }
 
 }
+
