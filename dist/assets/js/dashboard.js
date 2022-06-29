@@ -1,6 +1,6 @@
 /*DASHBOARD DE LEXTENSION*/
 
-setTimeout(get_chrome_value, 250);
+setTimeout(get_chrome_value, 250); // une pause de 250 millesecondes avant de lancer la function get_chrome_value
 
 let activeClass = document.getElementById("activeOne"); //on recupere la classe active
 activeClass.addEventListener("click", ActiveOne); //Ajoute la fonction au boutton submit
@@ -89,12 +89,10 @@ function setInformationCompany(company, url, lastConnexion, categoryName) {
 
             if (companyWebsite !== null && companyWebsite !== "") { //si le site web existe
 
-
                 if (url.includes(companyWebsite.replace(/\s/g, '')) && !existCompany) {
 
                     currentCompanyCategory = company[k]['id_company']['id_category']['label'];//categorie actuel du site à laquel se trouve le client
                     activeClass.classList.remove("d-none"); //affiche le boutton active
-
 
                     /*Informations l'entreprise*/
                     let infosPhoneDiv = document.querySelector("#infosPhone"); //div de l'information du partenaire
@@ -105,10 +103,8 @@ function setInformationCompany(company, url, lastConnexion, categoryName) {
                     infosPhoneDiv.innerHTML += "<p>Adresse : " + company[k]['id_company']['address'] + "</p>"; //affichage de l'adresse du partenaire
                     infosPhoneDiv.innerHTML += "<p>Description : " + company[k]['id_company']['presentation'] + "</p>"; //affichage de la description du partenaire
 
-
                     /*Information de l'entreprise*/
                     let infos = document.querySelector("#horaires"); //div de l'information de l'entreprise
-
 
                     if (company_open(new Date(), company[k]['id_company']['hours'][currentDayName]['open_hour'], company[k]['id_company']['hours'][currentDayName]['close_hour'])) {
                         infos.innerHTML += "<div id='name'><h2>" + companyCommercial_name + "</h2><div class='statusOpen'><div class='open'></div><p>Ouvert</p></div></div>";//Notification d'ouverture !
@@ -162,7 +158,6 @@ function setInformationCompany(company, url, lastConnexion, categoryName) {
                 }
                 /*tout les partenaires*/
                 gridPattern.innerHTML += "<a class='patern " + company[k]['id_company']['id_category']['_id'] + " store' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
-
             }
         }
     }
@@ -246,5 +241,4 @@ function company_open(currentDay, openHours, closeHours) {//donne l'information 
     } else {
         return false;//fermé actuelement
     }
-
 }

@@ -4,7 +4,7 @@ const urlAPI="https://chympy.net/api/";
 
 function get_chrome_value() {
 
-    let currentURL=window.location.href; //recupere l'url de la page
+    let currentURL = window.location.href; //recupere l'url de la page
 
     chrome.storage.local.get(["company", "urlChrome","token"], function (items) { //recupere les données stockées dans le local storage
         if(items['token'] !== undefined) {
@@ -17,14 +17,13 @@ function get_chrome_value() {
             chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
                 if (msg.action === "updateIcon") {
                         chrome.browserAction.setIcon({path: '/dist/assets/img/on.png'});
-                }
+                } // Si l'utilisateur est log l'icon de l'extention change
             });
 
             if (items['urlChrome'] !== null && items['urlChrome'] !== undefined && currentURL === items['urlChrome']) { //verifie si l'url de la page est la meme que celle stockée dans le local storage
                 setBanner(JSON.parse(items['company']), items['urlChrome']); //appel de la fonction setBanner
             } else {
-                chrome.storage.local.set({urlChrome: currentURL}, function () {
-                });//on stock l'url actuel
+                chrome.storage.local.set({urlChrome: currentURL}, function () {});//on stock l'url actuel
                 get_chrome_value();//fonction recurssive tant qu'on a pas l'url
             }
         }else{
@@ -41,7 +40,6 @@ function setBanner(company,url){
 
         if (company[k] !== null && company[k] !== undefined) { //verifie si la company n'est pas null ou undefined
 
-
             let companyWebsite = company[k]['id_company']['socials']['website']; //recupere le site web de la company
             let conditionCashBack = company[k]['conditions']['min_value']; //recupere la condition de cashback
             let conditionMinCashBack = company[k]['min_cashback'];
@@ -51,7 +49,6 @@ function setBanner(company,url){
             let freeConditonMinCashBack = '';
 
             if (companyWebsite !== null && companyWebsite !== "") {
-
 
                 if (url.includes(companyWebsite.replace(/\s/g, '')) && !url.includes("google.com")) { //verifie si l'url de la page contient le site web de la company
 

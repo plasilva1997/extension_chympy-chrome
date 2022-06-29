@@ -8,7 +8,6 @@ function notification(onCheck){
 
             if (token !== null && token !== undefined && items.company !== null && items.company !== undefined) { //si le token et les partenaires sont null
 
-
                 let countCurrentCompany = JSON.parse(items["company"]).length;
 
                 fetch("https://api-chympy.plasilva.com/", { //requete avec les données
@@ -16,10 +15,10 @@ function notification(onCheck){
                 }).then(function (response) { //recuperation du json
                     return response.json();
                 }).then(function (data) {
-
-                    if (countCurrentCompany !== data.length && data.length-countCurrentCompany>0) {
+                        // si la taille du tableau des partenaires dans localStorage est inferieur au tableau de l'api
+                    if (countCurrentCompany !== data.length && data.length - countCurrentCompany > 0) {
                         chrome.browserAction.setBadgeText({
-                            text: (data.length - countCurrentCompany).toString()
+                            text: (data.length - countCurrentCompany).toString() // afficher le nombre des nouveaux partenaires
                         });
                     }
 
@@ -30,8 +29,7 @@ function notification(onCheck){
                     }
                     chrome.storage.local.set({company: JSON.stringify(data)}, function() {});
 
-
-                }).catch((error) => { //si il y a une erreur on redirige vers la page d'accueil
+                }).catch((error) => {
                 });
             } else {
                 chrome.browserAction.setBadgeText({
@@ -40,7 +38,7 @@ function notification(onCheck){
             }
         });
 
-    setTimeout(notification,10000000000); //on relance la requete toutes les heures
+    setTimeout(notification,3600000); //on relance la requete toutes les heures
 
 }
 

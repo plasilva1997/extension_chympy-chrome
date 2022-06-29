@@ -23,7 +23,6 @@ function init_extension() {//recupere les infos de base pour l'extension
     errorMessageDiv = document.querySelector("#error-message");// recuper la div des erreurs
 }
 
-
 function login() {
     var login = document.getElementById("email").value; //recuperation de l'email
     var password = document.getElementById("password").value; //recuperation du mot de passe

@@ -1,4 +1,4 @@
-function fetchApi(root, method, token, bodyValue) { // cette function permet d'être appelé dans d'autres fichiers js
+function fetchApi(root, method, token, bodyValue) { // cette function de fetch permet d'optimiser en l'appelenat dans d'autres fichiers js
 
     let url = "https://chympy.net/api/" + root;
     let header = '';
