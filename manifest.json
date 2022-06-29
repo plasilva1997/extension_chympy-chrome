@@ -1,14 +1,18 @@
 {
   "manifest_version": 2,
-  "name": "Chympy",
+  "name": "Chympy - Consommer local et malin",
+  "description": "Consommez local et récupérez une partie de vos dépenses directement sur votre compte ! Gagnez en pouvoir d'achat en soutenant l’emploi et l’économie locale",
+  "author": "Chympy",
   "version": "0.1.0",
-  "permissions": [
-    "all_urls"],
-
-  "browser_action": {"default_popup": "index.html"},
-  "content_scripts": [{
-    "js": [
-      "main.js"
-    ]
-  }]
+  "permissions": ["activeTab", "all_urls","tabs","storage"],
+  "background": {"scripts": ["dist/assets/js/background.js","dist/assets/js/notification.js"]},
+  "browser_action": {"default_popup": "dist/index.html"},
+  "content_scripts":[{
+    "matches": ["https://*/*","http://*/*"],
+    "js": ["dist/assets/js/background.js","dist/assets/js/notification.js"]
+  }],
+  "icons": {
+    "64" : "dist/assets/img/off.png"
+  },
+  "content_security_policy":"script-src 'self' 'unsafe-inline' 'unsafe eval'  https://apis.google.com/js/client.js?; object-src 'self'"
 }

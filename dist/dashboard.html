@@ -1,0 +1,56 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="">
+
+<div class="container__dashboard">
+    <div class="navbar">
+        <div class="logo lgNav"></div>
+        <div class="navBarNav">
+            <a href="about.html" class="linkAbout">À propos</a>
+            <div id="darkmode"></div>
+            <div id="logout" class="logout-action"></div>
+        </div>
+
+
+    </div>
+    <div class="contain">
+
+        <div id="infosCompany">
+            <div id="infos">
+                <div id="horaires">
+
+                </div>
+
+                <div id="infosPhone">
+
+                </div>
+            </div>
+
+        </div>
+        <div id="choiceCategory">
+            <select name='categorie' id='categorie-select'>
+                <option value="tout">Categorie</option>
+            </select>
+        </div>
+        <div class="btnChoice">
+            <div id="activeOne" class="categorySame d-none">Partenaires similaire</div>
+            <div id="activeTwo" class="allPaterns active">Nos partenaires</div>
+            <div id="activeThree" class="allPaterns d-none">Nouveaux partenaires</div>
+        </div>
+        <div class="paterns">
+            <div id="grid__paterns1" class="grid__paterns1 d-none"></div>
+            <div id="grid__paterns" class="grid__paterns"></div>
+            <div id="grid__new__paterns" class="grid__paterns d-none"></div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/functions.js"></script>
+<script src="assets/js/notification.js"></script>
+<script src="assets/js/dashboard.js"></script>
+<script src="assets/js/logout.js"></script>
+<script src="assets/js/darkmode.js"></script>
+</body>
+</html>
